@@ -35,11 +35,17 @@
                <li class="menu-title" data-key="t-menu">Menu</li>
 
                <li>
-                   <a href="index.html">
+                   <a href="{{ route('dyls.dashboard') }}">
                        <i class="bx bx-home-circle nav-icon"></i>
                        <span class="menu-item" data-key="t-dashboard">Dashboard</span>
                    </a>
                </li>
+               <li>
+                <a href="{{ route('dyls.reservas.calendario') }}">
+                    <i class="bx bx-home-circle nav-icon"></i>
+                    <span class="menu-item" data-key="t-dashboard">Reserva</span>
+                </a>
+            </li>
 
                <li class="menu-title" data-key="t-applications">Applications</li>
 

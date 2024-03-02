@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\Configuraciones\DatosEmpresaController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Reservas\CalendarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('logout',[LoginController::class,'logout'])->name('logout');
     Route::name('dyls.')->prefix('dyls')->group(function () {
         Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+        Route::name('reservas.')->prefix('reservas')->group(function () {
+            Route::get('calendario', [CalendarioController::class, 'calendario'])->name('calendario');
+        });
         Route::name('configuraciones.')->prefix('configuraciones')->group(function () {
             Route::get('datos-empresa', [DatosEmpresaController::class, 'datosEmpresa'])->name('datos-empresa');
         });
