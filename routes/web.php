@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\Configuraciones\DatosEmpresaController;
-use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\dyls\DashboardController;
+// use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Reservas\CalendarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('datos-empresa', [DatosEmpresaController::class, 'datosEmpresa'])->name('datos-empresa');
         });
     });
-    
-    
+
+
 });
