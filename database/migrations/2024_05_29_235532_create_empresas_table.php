@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
+            $table->string('abreviatura');
+            $table->string('nombre');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

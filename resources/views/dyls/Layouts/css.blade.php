@@ -1,6 +1,7 @@
 <!-- Library / Plugin Css Build -->
 <link rel="stylesheet" href="{{ asset('Template/css/core/libs.min.css')}}">
-
+<!-- Sweetlaert2 css -->
+<link rel="stylesheet" href="{{ asset('Template/vendor/sweetalert2/dist/sweetalert2.min.css')}}">
 <!-- qompac-ui Design System Css -->
 <link rel="stylesheet" href="{{ asset('Template/css/qompac-ui.min.css?v=1.0.1')}}">
 

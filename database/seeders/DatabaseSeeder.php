@@ -4,6 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Database\Seeders\Job\CategoriaSeeder;
+use Database\Seeders\Job\EstadoSeeder;
+use Database\Seeders\Job\NivelSeeder;
+use Database\Seeders\Job\TarifaSeeder;
 use Database\Seeders\Job\UsuarioSeeder;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +26,10 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             UsuarioSeeder::class,
+            EstadoSeeder::class,
+            NivelSeeder::class,
+            CategoriaSeeder::class,
+            TarifaSeeder::class,
 
         ]);
     }

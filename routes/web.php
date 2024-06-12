@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\Configuraciones\DatosEmpresaController;
+use App\Http\Controllers\dyls\configuraciones\CategoriaController;
+use App\Http\Controllers\dyls\configuraciones\HabitacionController;
+use App\Http\Controllers\dyls\configuraciones\NivelController;
+use App\Http\Controllers\dyls\configuraciones\TarifaController;
+use App\Http\Controllers\dyls\configuraciones\UsuarioController;
 use App\Http\Controllers\dyls\DashboardController;
 // use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Reservas\CalendarioController;
@@ -35,7 +40,47 @@ Route::middleware(['auth'])->group(function () {
             Route::get('calendario', [CalendarioController::class, 'calendario'])->name('calendario');
         });
         Route::name('configuraciones.')->prefix('configuraciones')->group(function () {
-            Route::get('datos-empresa', [DatosEmpresaController::class, 'datosEmpresa'])->name('datos-empresa');
+            // Route::get('datos-empresa', [DatosEmpresaController::class, 'datosEmpresa'])->name('datos-empresa');
+
+
+            Route::name('usuarios.')->prefix('usuarios')->group(function () {
+                Route::get('lista', [UsuarioController::class, 'lista'])->name('lista');
+                Route::get('listar', [UsuarioController::class, 'listar'])->name('listar');
+                Route::get('formulario', [UsuarioController::class, 'formulario'])->name('formulario');
+                Route::get('guardar', [UsuarioController::class, 'guardar'])->name('guardar');
+                Route::get('eliminar', [UsuarioController::class, 'eliminar'])->name('eliminar');
+            });
+
+            Route::name('niveles.')->prefix('niveles')->group(function () {
+                Route::get('lista', [NivelController::class, 'lista'])->name('lista');
+                Route::post('listar', [NivelController::class, 'listar'])->name('listar');
+                Route::post('guardar', [NivelController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [NivelController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [NivelController::class, 'eliminar'])->name('eliminar');
+            });
+
+            Route::name('categorias.')->prefix('categorias')->group(function () {
+                Route::get('lista', [CategoriaController::class, 'lista'])->name('lista');
+                Route::post('listar', [CategoriaController::class, 'listar'])->name('listar');
+                Route::post('guardar', [CategoriaController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [CategoriaController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [CategoriaController::class, 'eliminar'])->name('eliminar');
+            });
+
+            Route::name('habitaciones.')->prefix('habitaciones')->group(function () {
+                Route::get('lista', [HabitacionController::class, 'lista'])->name('lista');
+                Route::post('listar', [HabitacionController::class, 'listar'])->name('listar');
+                Route::post('guardar', [HabitacionController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [HabitacionController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [HabitacionController::class, 'eliminar'])->name('eliminar');
+            });
+            Route::name('tarifas.')->prefix('tarifas')->group(function () {
+                Route::get('lista', [TarifaController::class, 'lista'])->name('lista');
+                Route::post('listar', [TarifaController::class, 'listar'])->name('listar');
+                Route::post('guardar', [TarifaController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [TarifaController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [TarifaController::class, 'eliminar'])->name('eliminar');
+            });
         });
     });
 

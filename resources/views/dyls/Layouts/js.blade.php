@@ -5,6 +5,10 @@
 <!-- Slider-tab Script -->
 <script src="{{ asset('Template/js/plugins/slider-tabs.js') }}"></script>
 
+<!-- Sweet-alert Script -->
+<script src="{{ asset('Template/vendor/sweetalert2/dist/sweetalert2.min.js') }}" async></script>
+<script src="{{ asset('Template/js/plugins/sweet-alert.js') }}" defer></script>
+
 <!-- Lodash Utility -->
 <script src="{{ asset('Template/vendor/lodash/lodash.min.js') }}"></script>
 <!-- Utilities Functions -->
