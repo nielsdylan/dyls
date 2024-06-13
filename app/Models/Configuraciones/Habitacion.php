@@ -20,4 +20,17 @@ class Habitacion extends Model
     {
         return $this->belongsTo(Estado::class, 'estado');
     }
+
+    public function nivel(): BelongsTo
+    {
+        return $this->belongsTo(Nivel::class);
+    }
+    public function categoria(): BelongsTo
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+    public function tarifa(): BelongsTo
+    {
+        return $this->belongsTo(Tarifa::class);
+    }
 }

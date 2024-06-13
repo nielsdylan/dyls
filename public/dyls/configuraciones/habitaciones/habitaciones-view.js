@@ -1,4 +1,4 @@
-class NivelesView {
+class HabitacionesView {
 
     constructor(model) {
         this.model = model;
@@ -54,7 +54,7 @@ class NivelesView {
             },
             order: [[0, 'desc']],
             ajax: {
-                url: route('dyls.configuraciones.niveles.listar'),
+                url: route('dyls.configuraciones.habitaciones.listar'),
                 method: 'POST',
                 // headers: {'X-CSRF-TOKEN': token},
                 dataType: "JSON",
@@ -65,6 +65,10 @@ class NivelesView {
             columns: [
                 {data: 'id', className: 'text-center'},
                 {data: 'nombre', className: 'text-center'},
+                {data: 'nivel', className: 'text-center'},
+                {data: 'categoria', className: 'text-center'},
+                {data: 'tarifa', className: 'text-center'},
+                {data: 'descripcion'},
                 {data: 'estado_span', className: 'text-center'},
                 {data: 'accion', orderable: false, searchable: false, className: 'text-center'}
             ]
@@ -89,12 +93,13 @@ class NivelesView {
 
     eventos = () => {
 
-        $('#nuevo-nivel').click((e) => {
+        $('#nuevo').click((e) => {
             e.preventDefault();
             $("#guardar-modal")[0].reset();
             $('#nivel-modal').modal('show');
             $('#nivel-modal').find('#nivel-titulo').text('Nuevo Nivel');
-
+            $('#nivel-modal').find('[name="id"]').val(0);
+            $('#nivel-modal').find('select').find('option').removeAttr('selected');
         });
         $('#guardar-modal').submit((e) => {
             e.preventDefault();
@@ -115,11 +120,17 @@ class NivelesView {
         $('#tabla-data').on("click", 'a.editar', (e) => {
             e.preventDefault();
             $("#guardar-modal")[0].reset();
+            $('#nivel-modal').find('select').find('option').removeAttr('selected');
             let id = $(e.currentTarget).attr('data-id');
             this.model.editar(id).then((respuesta) => {
                 $('#nivel-modal').find('#nivel-titulo').text('Editar Nivel');
                 $('#nivel-modal').find('[name="id"]').val(respuesta.id);
                 $('#nivel-modal').find('[name="nombre"]').val(respuesta.nombre);
+                $('#nivel-modal').find('[name="nivel_id"]').find('[value="'+respuesta.nivel_id+'"]').attr('selected','true');
+                $('#nivel-modal').find('[name="categoria_id"]').find('[value="'+respuesta.categoria_id+'"]').attr('selected','true');
+                $('#nivel-modal').find('[name="tarifa_id"]').find('[value="'+respuesta.tarifa_id+'"]').attr('selected','true');
+                $('#nivel-modal').find('[name="precio"]').val(respuesta.precio);
+                $('#nivel-modal').find('[name="descripcion"]').val(respuesta.descripcion);
                 $('#nivel-modal').modal('show');
                 $('#tabla-data').DataTable().ajax.reload();
             }).fail((respuesta) => {

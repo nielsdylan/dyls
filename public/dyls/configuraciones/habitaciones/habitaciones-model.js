@@ -1,4 +1,4 @@
-class NivelesModel {
+class HabitacionesModel {
 
     constructor(token) {
         this.token = token;
@@ -6,7 +6,7 @@ class NivelesModel {
 
     guardar = (data) => {
         return $.ajax({
-            url: route("dyls.configuraciones.niveles.guardar"),
+            url: route("dyls.configuraciones.habitaciones.guardar"),
             type: "POST",
             dataType: "JSON",
             // processData: false,
@@ -16,7 +16,7 @@ class NivelesModel {
     }
     editar = (id) => {
         return $.ajax({
-            url: route("dyls.configuraciones.niveles.editar", {id: id}),
+            url: route("dyls.configuraciones.habitaciones.editar", {id: id}),
             type: "GET",
             dataType: "JSON",
             data: { _token: this.token },
@@ -24,7 +24,7 @@ class NivelesModel {
     }
     eliminar = (id) => {
         return $.ajax({
-            url: route("dyls.configuraciones.niveles.eliminar", {id: id}),
+            url: route("dyls.configuraciones.habitaciones.eliminar", {id: id}),
             type: "PUT",
             dataType: "JSON",
             data: { _token: this.token },

@@ -58,7 +58,7 @@
         <div class="card-body">
             <div class="row justify-content-md-center mb-3">
                 <div class="col-md-8">
-                    <button type="button" class="mt-2 btn btn-info btn-sm" id="nuevo-nivel">
+                    <button type="button" class="mt-2 btn btn-info btn-sm" id="nuevo">
 
 
 

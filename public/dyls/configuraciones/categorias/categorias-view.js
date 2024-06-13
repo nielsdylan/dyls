@@ -89,10 +89,11 @@ class CategoriasView {
 
     eventos = () => {
 
-        $('#nuevo-nivel').click((e) => {
+        $('#nuevo').click((e) => {
             e.preventDefault();
             $("#guardar-modal")[0].reset();
             $('#nivel-modal').modal('show');
+            $('#nivel-modal').find('[name="id"]').val(0);
             $('#nivel-modal').find('#nivel-titulo').text('Nueva Categoría');
 
         });
