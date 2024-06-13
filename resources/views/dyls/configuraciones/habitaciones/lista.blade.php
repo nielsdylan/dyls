@@ -78,7 +78,7 @@
                         <table id="tabla-data" class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    {{-- <th>#</th> --}}
                                     <th>Nombre</th>
                                     <th>Nivel</th>
                                     <th>Categoria</th>

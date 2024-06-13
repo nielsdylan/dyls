@@ -63,7 +63,7 @@ class HabitacionesView {
                 // data: filtros
             },
             columns: [
-                {data: 'id', className: 'text-center'},
+                // {data: 'id', className: 'text-center'},
                 {data: 'nombre', className: 'text-center'},
                 {data: 'nivel', className: 'text-center'},
                 {data: 'categoria', className: 'text-center'},
