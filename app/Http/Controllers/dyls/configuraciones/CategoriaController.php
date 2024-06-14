@@ -25,7 +25,7 @@ class CategoriaController extends Controller
             })
             ->addColumn('accion', function ($data) {
                 return
-                '<div class="d-flex justify-content-evenly" >
+                '<div class="flex align-items-center list-user-action" >
                     <a href="#" class="btn btn-default btn-icon btn-sm editar" data-id="' . $data->id . '" >
                         <span class="btn-inner">
 

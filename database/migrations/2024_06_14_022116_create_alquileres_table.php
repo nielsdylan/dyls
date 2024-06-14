@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('alquileres', function (Blueprint $table) {
             $table->id();
             $table->integer('habitacion_id')->nullable();
-            $table->integer('cliente_id')->nullable();
+            // $table->integer('cliente_id')->nullable();
             $table->integer('estado_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
