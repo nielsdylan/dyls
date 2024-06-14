@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('codigo');
             $table->integer('persona_id')->nullable();
+            $table->integer('estado_id')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

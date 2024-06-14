@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personas', function (Blueprint $table) {
+        Schema::create('tipo_documentos', function (Blueprint $table) {
             $table->id();
-            $table->string('apellido_paterno')->nullable();
-            $table->string('apellido_materno')->nullable();
-            $table->string('nro_documento')->nullable();
-            $table->integer('documento_id')->nullable();
-            $table->string('nombres')->nullable();
+            $table->string('codigo')->nullable();
+            $table->string('nombre')->nullable();
             $table->integer('estado_id')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personas');
+        Schema::dropIfExists('tipo_documentos');
     }
 };

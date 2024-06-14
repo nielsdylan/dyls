@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('abreviatura');
             $table->string('nombre');
+            $table->integer('estado_id')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
