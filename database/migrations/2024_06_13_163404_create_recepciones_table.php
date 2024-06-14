@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personas', function (Blueprint $table) {
+        Schema::create('recepciones', function (Blueprint $table) {
             $table->id();
+            $table->integer('habitacion_id')->nullable();
+            $table->integer('cliente_id')->nullable();
+            $table->integer('estado_id')->nullable();
             $table->timestamps();
-            $table->string('apellido_paterno')->nullable();
-            $table->string('apellido_materno')->nullable();
-            $table->string('nro_documento')->nullable();
-            $table->integer('documento_id')->nullable();
-            $table->string('nombres')->nullable();
             $table->softDeletes();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personas');
+        Schema::dropIfExists('recepciones');
     }
 };
