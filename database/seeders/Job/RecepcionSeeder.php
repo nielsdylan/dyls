@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AlquilerSeeder extends Seeder
+class RecepcionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,42 +15,42 @@ class AlquilerSeeder extends Seeder
     {
         //
         //1
-        DB::table('alquileres')->insert([
+        DB::table('recepciones')->insert([
             'habitacion_id' => 1,
             'estado_id'     => 3,
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
         //2
-        DB::table('alquileres')->insert([
+        DB::table('recepciones')->insert([
             'habitacion_id' => 2,
             'estado_id'     => 3,
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
         //3
-        DB::table('alquileres')->insert([
+        DB::table('recepciones')->insert([
             'habitacion_id' => 3,
             'estado_id'     => 3,
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
         //4
-        DB::table('alquileres')->insert([
+        DB::table('recepciones')->insert([
             'habitacion_id' => 4,
             'estado_id'     => 3,
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
         //5
-        DB::table('alquileres')->insert([
+        DB::table('recepciones')->insert([
             'habitacion_id' => 5,
             'estado_id'     => 3,
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
         //6
-        DB::table('alquileres')->insert([
+        DB::table('recepciones')->insert([
             'habitacion_id' => 6,
             'estado_id'     => 3,
             'created_at'        => date('Y-m-d H:i:s'),

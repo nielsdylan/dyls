@@ -8,6 +8,7 @@ use App\Http\Controllers\dyls\configuraciones\NivelController;
 use App\Http\Controllers\dyls\configuraciones\TarifaController;
 use App\Http\Controllers\dyls\configuraciones\UsuarioController;
 use App\Http\Controllers\dyls\DashboardController;
+use App\Http\Controllers\dyls\RecepcionController;
 // use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Reservas\CalendarioController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,15 @@ Route::middleware(['auth'])->group(function () {
         Route::name('reservas.')->prefix('reservas')->group(function () {
             Route::get('calendario', [CalendarioController::class, 'calendario'])->name('calendario');
         });
+
+        Route::name('recepcion.')->prefix('recepcion')->group(function () {
+            Route::get('lista', [RecepcionController::class, 'lista'])->name('lista');
+            Route::get('listar', [RecepcionController::class, 'listar'])->name('listar');
+            Route::get('formulario', [RecepcionController::class, 'formulario'])->name('formulario');
+            Route::get('guardar', [RecepcionController::class, 'guardar'])->name('guardar');
+            Route::get('eliminar', [RecepcionController::class, 'eliminar'])->name('eliminar');
+        });
+
         Route::name('configuraciones.')->prefix('configuraciones')->group(function () {
             // Route::get('datos-empresa', [DatosEmpresaController::class, 'datosEmpresa'])->name('datos-empresa');
 

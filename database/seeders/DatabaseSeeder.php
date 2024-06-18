@@ -4,13 +4,13 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use Database\Seeders\Job\AlquilerSeeder;
 use Database\Seeders\Job\CategoriaSeeder;
 use Database\Seeders\Job\ClienteSeeder;
 use Database\Seeders\Job\EstadoSeeder;
 use Database\Seeders\Job\HabitacionSeeder;
 use Database\Seeders\Job\NivelSeeder;
 use Database\Seeders\Job\PersonaSeeder;
+use Database\Seeders\Job\RecepcionSeeder;
 use Database\Seeders\Job\TarifaSeeder;
 use Database\Seeders\Job\TipoDocumentoSeeder;
 use Database\Seeders\Job\UsuarioSeeder;
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             PersonaSeeder::class,
             ClienteSeeder::class,
             TipoDocumentoSeeder::class,
-            AlquilerSeeder::class,
+            RecepcionSeeder::class,
 
         ]);
     }

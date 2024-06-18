@@ -34,7 +34,7 @@ class EstadoSeeder extends Seeder
         DB::table('estados')->insert([
             'nombre'        => 'DISPONIBLE',
             'descripcion'   => 'ES CUANDO LA HABITACIÓN ESTA DISPONIBLE PARA EL ALQUILER. ',
-            'color'         => 'danger',
+            'color'         => 'success',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -42,7 +42,7 @@ class EstadoSeeder extends Seeder
         DB::table('estados')->insert([
             'nombre'        => 'RESERVACIÓN',
             'descripcion'   => 'ES CUANDO LA HABITACIÓN SE ENCUENTRA SEPARADA PARA UN CLIENTE. ',
-            'color'         => 'danger',
+            'color'         => 'warning',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -58,7 +58,7 @@ class EstadoSeeder extends Seeder
         DB::table('estados')->insert([
             'nombre'        => 'LIMPIEZA',
             'descripcion'   => 'ES CUANDO LA HABITACIÓN SE RELIZA UNA LIMPIEZA . ',
-            'color'         => 'danger',
+            'color'         => 'info',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
