@@ -54,7 +54,62 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Datos de la habitación</h4>
+                        <h6 class="card-title">Datos de la habitación</h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <p>{{$recepcione->habitaciones->nombre}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tarifa">Tarifa</label>
+                                <p>{{$recepcione->habitaciones->tarifa->nombre}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="categoria">Categoría</label>
+                                <p>{{$recepcione->habitaciones->categoria->nombre}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="detalle">Detalle</label>
+                                <p>{{$recepcione->habitaciones->descripcion}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="precio">Precio</label>
+                                <p>{{$recepcione->habitaciones->precio}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="estado">Estados</label>
+                                <p>{{$recepcione->estados->nombre}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h6 class="card-title">Datos de hospedaje</h6>
                     </div>
                 </div>
                 <div class="card-body">
