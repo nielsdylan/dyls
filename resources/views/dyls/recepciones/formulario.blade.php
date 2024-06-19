@@ -48,9 +48,8 @@
 @endsection
 @section('content')
 
-
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
@@ -102,10 +101,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
@@ -116,41 +112,34 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <p>{{$recepcione->habitaciones->nombre}}</p>
+                                <label for="cliente_id">Cliente</label>
+                                <input id="cliente_id" class="form-control" type="text" name="cliente_id" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="tarifa">Tarifa</label>
-                                <p>{{$recepcione->habitaciones->tarifa->nombre}}</p>
+                                <label for="fecha_entrada">Fecha de entrada</label>
+                                <input id="fecha_entrada" class="form-control " type="date" name="fecha_entrada" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="categoria">Categoría</label>
-                                <p>{{$recepcione->habitaciones->categoria->nombre}}</p>
+                                <label for="fecha_salida">Fecha de salida</label>
+                                <input id="fecha_salida" class="form-control" type="date" name="fecha_salida" required>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="detalle">Detalle</label>
-                                <p>{{$recepcione->habitaciones->descripcion}}</p>
+                                <label for="hora_entrada">Fecha de salida</label>
+                                <input id="hora_entrada" class="form-control" type="time" name="hora_entrada" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="precio">Precio</label>
-                                <p>{{$recepcione->habitaciones->precio}}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="estado">Estados</label>
-                                <p>{{$recepcione->estados->nombre}}</p>
+                                <label for="hora_salida">Fecha de salida</label>
+                                <input id="hora_salida" class="form-control" type="time" name="hora_salida" required>
                             </div>
                         </div>
                     </div>
@@ -158,6 +147,7 @@
             </div>
         </div>
     </div>
+
 
 
     <div class="modal fade" id="nivel-modal" tabindex="-1" role="dialog" aria-hidden="true">
