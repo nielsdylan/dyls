@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
         Route::name('recepcion.')->prefix('recepcion')->group(function () {
             Route::get('lista', [RecepcionController::class, 'lista'])->name('lista');
             Route::get('listar', [RecepcionController::class, 'listar'])->name('listar');
-            Route::get('formulario', [RecepcionController::class, 'formulario'])->name('formulario');
+            Route::get('formulario/{id}', [RecepcionController::class, 'formulario'])->name('formulario');
             Route::get('guardar', [RecepcionController::class, 'guardar'])->name('guardar');
             Route::get('eliminar', [RecepcionController::class, 'eliminar'])->name('eliminar');
         });

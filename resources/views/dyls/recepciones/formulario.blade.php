@@ -1,5 +1,5 @@
 @extends('dyls.Layouts.app-main')
-{{-- @section('banner')
+@section('banner')
     iq-banner
 @endsection
 @section('navbar-header')
@@ -8,11 +8,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="flex-wrap d-flex justify-content-between align-items-center">
-                        <div>
+                        {{-- <div>
                             <h1>Hello Qompac!</h1>
                             <p>Experience a simple yet powerful way to build Dashboards with qompac-ui.</p>
-                        </div>
-                        <div>
+                        </div> --}}
+                        {{-- <div>
                             <a href="" class="btn btn-link btn-soft-light">
                                 <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -25,7 +25,7 @@
                                 </svg>
                                 Announcements
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -45,35 +45,63 @@
                 class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX" loading="lazy">
         </div>
     </div>
-@endsection --}}
+@endsection
 @section('content')
-    {{-- <div class="row">
-        <div class="col-sm-12"> --}}
+
 
     <div class="row">
-        @foreach ($recepciones as $key => $value)
-            <div class="col-md-3">
-                <a href="{{ route('dyls.recepcion.formulario', ['id'=>$value->id]) }}" target="_blank" rel="noopener noreferrer">
-                    <div class="card bg-soft-{{$value->estados->color}}">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-
-                                <div class="text-start">
-                                    <h2 >{{$value->habitaciones->nombre}}</h2>
-                                    {{$value->habitaciones->categoria->nombre}}
-                                </div>
-                                <div class="bg-soft-{{$value->estados->color}} rounded p-3">
-                                    <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.997 15.1746C7.684 15.1746 4 15.8546 4 18.5746C4 21.2956 7.661 21.9996 11.997 21.9996C16.31 21.9996 19.994 21.3206 19.994 18.5996C19.994 15.8786 16.334 15.1746 11.997 15.1746Z" fill="currentColor"></path>
-                                        <path opacity="0.4" d="M11.9971 12.5838C14.9351 12.5838 17.2891 10.2288 17.2891 7.29176C17.2891 4.35476 14.9351 1.99976 11.9971 1.99976C9.06008 1.99976 6.70508 4.35476 6.70508 7.29176C6.70508 10.2288 9.06008 12.5838 11.9971 12.5838Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Datos de la habitación</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <p>{{$recepcione->habitaciones->nombre}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tarifa">Tarifa</label>
+                                <p>{{$recepcione->habitaciones->tarifa->nombre}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="categoria">Categoría</label>
+                                <p>{{$recepcione->habitaciones->categoria->nombre}}</p>
                             </div>
                         </div>
                     </div>
-                </a>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="detalle">Detalle</label>
+                                <p>{{$recepcione->habitaciones->descripcion}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="precio">Precio</label>
+                                <p>{{$recepcione->habitaciones->precio}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="estado">Estados</label>
+                                <p>{{$recepcione->estados->nombre}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        @endforeach
+        </div>
     </div>
 
 
@@ -93,7 +121,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="nombre">Nombre</label>
-                                    <input id="nombre" class="form-control form-control-sm" type="text" name="nombre"
+                                    <input id="nombre" class="form-control form-control-sm form-control form-control-sm-sm" type="text" name="nombre"
                                         required>
                                 </div>
                             </div>
@@ -114,8 +142,8 @@
     <script src="{{ asset('dyls/recepciones/recepciones-model.js') }}"></script>
     <script src="{{ asset('dyls/recepciones/recepciones-view.js') }}"></script>
     <script>
-        const view = new RecepcionesView(new RecepcionesModel(token));
+        // const view = new RecepcionesView(new RecepcionesModel(token));
         // view.listar();
-        view.eventos();
+        // view.eventos();
     </script>
 @endsection

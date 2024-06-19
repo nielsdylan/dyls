@@ -52,6 +52,11 @@ class RecepcionController extends Controller
                 </div>';
             })->rawColumns(['accion', 'visible_span', 'estado_span'])->make(true);
     }
+    public function formulario($id){
+        $recepcione = Recepcion::find($id);
+        return view('dyls.recepciones.formulario', get_defined_vars());
+        // return $id;
+    }
     public function guardar(Request $request)
     {
         try {

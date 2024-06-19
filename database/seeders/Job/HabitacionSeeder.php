@@ -18,10 +18,10 @@ class HabitacionSeeder extends Seeder
         DB::table('habitaciones')->insert([
             'nombre'    => '201',
             'nivel_id'  => 2,
-            'categoria_id'  => 2,
+            'categoria_id'  => 1,
             'tarifa_id'  => 5,
             'precio'  => 50,
-'descripcion'  => '...',
+            'descripcion'  => '...',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -32,7 +32,7 @@ class HabitacionSeeder extends Seeder
             'categoria_id'  => 2,
             'tarifa_id'  => 5,
             'precio'  => 50,
-'descripcion'  => '...',
+            'descripcion'  => '...',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -40,10 +40,10 @@ class HabitacionSeeder extends Seeder
         DB::table('habitaciones')->insert([
             'nombre'    => '203',
             'nivel_id'  => 2,
-            'categoria_id'  => 2,
+            'categoria_id'  => 3,
             'tarifa_id'  => 5,
             'precio'  => 50,
-'descripcion'  => '...',
+            'descripcion'  => '...',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -51,7 +51,7 @@ class HabitacionSeeder extends Seeder
         DB::table('habitaciones')->insert([
             'nombre'    => '301',
             'nivel_id'  => 3,
-            'categoria_id'  => 2,
+            'categoria_id'  => 1,
             'tarifa_id'  => 5,
             'precio'  => 50,
 'descripcion'  => '...',
@@ -73,7 +73,7 @@ class HabitacionSeeder extends Seeder
         DB::table('habitaciones')->insert([
             'nombre'    => '303',
             'nivel_id'  => 3,
-            'categoria_id'  => 2,
+            'categoria_id'  => 3,
             'tarifa_id'  => 5,
             'precio'  => 50,
             'descripcion'  => '...',
