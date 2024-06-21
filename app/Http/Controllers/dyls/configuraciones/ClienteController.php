@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\dyls;
+namespace App\Http\Controllers\dyls\configuraciones;
 
 use App\Http\Controllers\Controller;
-use App\Models\Recepcion;
+use App\Models\Configuraciones\Cliente;
+use App\Models\Configuraciones\TipoDocumento;
 use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class RecepcionController extends Controller
+class ClienteController extends Controller
 {
     //
     public function lista()
     {
-        $recepciones = Recepcion::where('estado_id','!=',2)->get();
-        // foreach ($recepciones as $key => $value) {
-        //     return $value->habitaciones;
-        // }
-        // return $recepciones;
-        return view('dyls.recepciones.lista', get_defined_vars());
+        $tipo_documentos = TipoDocumento::where('estado_id','!=',2)->get();
+        return view('dyls.configuraciones.clientes.lista', get_defined_vars());
     }
 
     public function listar()
     {
-        $data = Recepcion::all();
+        $data = Cliente::all();
         return DataTables::of($data)
+            ->addColumn('apellidos_nombres', function ($data) {
+                return $data->persona->apellido_paterno .' '. $data->persona->apellido_materno . ' ' . $data->persona->nombres;
+            })
             ->addColumn('estado_span', function ($data) {
                 return '<span class="badge bg-'.$data->estados->color.' p-2 text-white">'.$data->estados->nombre.'</span>';
             })
@@ -52,15 +52,10 @@ class RecepcionController extends Controller
                 </div>';
             })->rawColumns(['accion', 'visible_span', 'estado_span'])->make(true);
     }
-    public function formulario($id){
-        $recepcion = Recepcion::find($id);
-        return view('dyls.recepciones.formulario', get_defined_vars());
-        // return $id;
-    }
     public function guardar(Request $request)
     {
         try {
-            $data = Recepcion::firstOrNew(['id' => $request->id]);
+            $data = Cliente::firstOrNew(['id' => $request->id]);
             $data->nombre   = $request->nombre;
             $data->save();
             // if ((int) $request->id == 0) {
@@ -84,14 +79,14 @@ class RecepcionController extends Controller
     }
 
     function editar($id) {
-        $data = Recepcion::find($id);
+        $data = Cliente::find($id);
         // LogActividades::guardar(Auth()->user()->id, 6, 'FORMULARIO EMPRESA', $data->getTable(), $data, NULL, 'SELECCIONO UNA EMPRESA PARA MODIFICARLO');
         return response()->json($data,200);
     }
 
     function eliminar($id) {
-        $data = Recepcion::find($id);
-        $data->estado   = 2;
+        $data = Cliente::find($id);
+        $data->estado_id   = 2;
         $data->save();
         // $data->delete();
         // LogActividades::guardar(Auth()->user()->id, 5, 'ELIMINO UNA EMPRESA', $data->getTable(), $data, NULL, 'ELIMINO UN REGISTRO DE LA LISTA DE EMPRESAS');

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\Configuraciones\DatosEmpresaController;
 use App\Http\Controllers\dyls\configuraciones\CategoriaController;
+use App\Http\Controllers\dyls\configuraciones\ClienteController;
 use App\Http\Controllers\dyls\configuraciones\HabitacionController;
 use App\Http\Controllers\dyls\configuraciones\NivelController;
 use App\Http\Controllers\dyls\configuraciones\TarifaController;
@@ -90,6 +91,13 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('guardar', [TarifaController::class, 'guardar'])->name('guardar');
                 Route::get('editar/{id}', [TarifaController::class, 'editar'])->name('editar');
                 Route::put('eliminar/{id}', [TarifaController::class, 'eliminar'])->name('eliminar');
+            });
+            Route::name('clientes.')->prefix('clientes')->group(function () {
+                Route::get('lista', [ClienteController::class, 'lista'])->name('lista');
+                Route::post('listar', [ClienteController::class, 'listar'])->name('listar');
+                Route::post('guardar', [ClienteController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [ClienteController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [ClienteController::class, 'eliminar'])->name('eliminar');
             });
         });
     });

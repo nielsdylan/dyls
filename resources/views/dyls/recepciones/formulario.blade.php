@@ -49,7 +49,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
@@ -58,50 +58,59 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <p>{{$recepcione->habitaciones->nombre}}</p>
+                                <label for="nombre">Nombre :</label>
+                                <p>{{$recepcion->habitaciones->nombre}}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="tarifa">Tarifa</label>
-                                <p>{{$recepcione->habitaciones->tarifa->nombre}}</p>
+                                <label for="tarifa">Tarifa :</label>
+                                <p>{{$recepcion->habitaciones->tarifa->nombre}}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="categoria">Categoría</label>
-                                <p>{{$recepcione->habitaciones->categoria->nombre}}</p>
+                                <label for="categoria">Categoría :</label>
+                                <p>{{$recepcion->habitaciones->categoria->nombre}}</p>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="detalle">Detalle</label>
-                                <p>{{$recepcione->habitaciones->descripcion}}</p>
+                                <label for="precio">Precio :</label>
+                                <p>{{$recepcion->habitaciones->precio}}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="precio">Precio</label>
-                                <p>{{$recepcione->habitaciones->precio}}</p>
+                                <label for="estado">Estados :</label>
+                                <p>{{$recepcion->estados->nombre}}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="estado">Estados</label>
-                                <p>{{$recepcione->estados->nombre}}</p>
+                                <label for="detalle">Detalle :</label>
+                                <p>{{$recepcion->habitaciones->descripcion}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
@@ -143,6 +152,37 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="adelanto">Adelanto</label>
+                                <input id="adelanto" class="form-control" type="text" name="adelanto" value="" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="saldo">Salto</label>
+                                <input id="saldo" class="form-control" type="text" name="saldo" placeholder="0.00" value="{{ $recepcion->habitaciones->precio}}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="total">Total</label>
+                                <input id="total" class="form-control" type="text" name="total" value="{{ $recepcion->habitaciones->precio}}" placeholder="0.00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="descripcion">Descripcion</label>
+                                <textarea id="descripcion" class="form-control" name="" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -184,10 +224,10 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ asset('dyls/recepciones/recepciones-model.js') }}"></script>
-    <script src="{{ asset('dyls/recepciones/recepciones-view.js') }}"></script>
+    <script src="{{ asset('dyls/recepcions/recepcions-model.js') }}"></script>
+    <script src="{{ asset('dyls/recepcions/recepcions-view.js') }}"></script>
     <script>
-        // const view = new RecepcionesView(new RecepcionesModel(token));
+        // const view = new recepcionsView(new recepcionsModel(token));
         // view.listar();
         // view.eventos();
     </script>
