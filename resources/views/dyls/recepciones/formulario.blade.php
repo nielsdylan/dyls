@@ -117,73 +117,89 @@
                         <h6 class="card-title">Datos de hospedaje</h6>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="cliente_id">Cliente</label>
-                                <input id="cliente_id" class="form-control" type="text" name="cliente_id" required>
+                <form action="" id="guardar">
+                    @csrf
+                    <div class="card-body">
+                        <input type="hidden" name="id" value="0">
+                        <input type="hidden" name="recepcion_id" value="{{$recepcion->id}}">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="cliente_id">Cliente</label>
+                                    <select id="cliente_id" class="form-select  mb-3 shadow-none" name="cliente_id" required>
+                                        <option value="">Seleccione...</option>
+                                        @foreach ($clientes as $value)
+                                        <option value="{{$value->id}}">{{$value->persona->nro_documento . ' - ' .$value->persona->nombres }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="fecha_entrada">Fecha de entrada</label>
+                                    <input id="fecha_entrada" class="form-control " type="date" name="fecha_entrada" value="{{date("Y-m-d")}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="fecha_salida">Fecha de salida</label>
+                                    <input id="fecha_salida" class="form-control" type="date" name="fecha_salida" value="{{date("Y-m-d",strtotime(date("Y-m-d")."+ 1 days"))}}" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="fecha_entrada">Fecha de entrada</label>
-                                <input id="fecha_entrada" class="form-control " type="date" name="fecha_entrada" required>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="hora_entrada">Hora de salida</label>
+                                    <input id="hora_entrada" class="form-control" type="time" name="hora_entrada" value="{{date("H:i")}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="hora_salida">Fecha de salida</label>
+                                    <input id="hora_salida" class="form-control" type="time" name="hora_salida" value="{{date("H:i")}}" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="fecha_salida">Fecha de salida</label>
-                                <input id="fecha_salida" class="form-control" type="date" name="fecha_salida" required>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="adelanto">Adelanto</label>
+                                    <input id="adelanto" class="form-control" type="text" name="adelanto" value="" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="saldo">Salto</label>
+                                    <input id="saldo" class="form-control" type="text" name="saldo" placeholder="0.00" value="{{ $recepcion->habitaciones->precio}}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="total">Total</label>
+                                    <input id="total" class="form-control" type="text" name="total" value="{{ $recepcion->habitaciones->precio}}" placeholder="0.00" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="hora_entrada">Fecha de salida</label>
-                                <input id="hora_entrada" class="form-control" type="time" name="hora_entrada" required>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="descripcion">Descripcion</label>
+                                    <textarea id="descripcion" class="form-control" name="" ></textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="hora_salida">Fecha de salida</label>
-                                <input id="hora_salida" class="form-control" type="time" name="hora_salida" required>
+
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-sm btn-success" >Guardar</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="adelanto">Adelanto</label>
-                                <input id="adelanto" class="form-control" type="text" name="adelanto" value="" placeholder="0.00">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="saldo">Salto</label>
-                                <input id="saldo" class="form-control" type="text" name="saldo" placeholder="0.00" value="{{ $recepcion->habitaciones->precio}}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="total">Total</label>
-                                <input id="total" class="form-control" type="text" name="total" value="{{ $recepcion->habitaciones->precio}}" placeholder="0.00" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="descripcion">Descripcion</label>
-                                <textarea id="descripcion" class="form-control" name="" ></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -224,11 +240,11 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ asset('dyls/recepcions/recepcions-model.js') }}"></script>
-    <script src="{{ asset('dyls/recepcions/recepcions-view.js') }}"></script>
+    <script src="{{ asset('dyls/recepciones/recepciones-model.js') }}"></script>
+    <script src="{{ asset('dyls/recepciones/recepciones-view.js') }}"></script>
     <script>
-        // const view = new recepcionsView(new recepcionsModel(token));
+        const view = new RecepcionesView(new RecepcionesModel(token));
         // view.listar();
-        // view.eventos();
+        view.eventos();
     </script>
 @endsection

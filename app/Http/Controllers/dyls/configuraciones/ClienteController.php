@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dyls\configuraciones;
 
 use App\Http\Controllers\Controller;
 use App\Models\Configuraciones\Cliente;
+use App\Models\Configuraciones\Persona;
 use App\Models\Configuraciones\TipoDocumento;
 use Exception;
 use Illuminate\Http\Request;
@@ -55,8 +56,20 @@ class ClienteController extends Controller
     public function guardar(Request $request)
     {
         try {
-            $data = Cliente::firstOrNew(['id' => $request->id]);
-            $data->nombre   = $request->nombre;
+            $cliente = Cliente::find($request->id);
+            $persona_id = ($cliente ? $cliente->id : 0);
+
+            $persona = Persona::firstOrNew(['id' => $persona_id]);
+            $persona->apellido_paterno = $request->apellido_paterno;
+            $persona->apellido_materno = $request->apellido_materno;
+            $persona->nro_documento    = $request->nro_documento;
+            $persona->documento_id     = $request->documento_id;
+            $persona->nombres          = $request->nombres;
+            $persona->save();
+
+            $data = Cliente::firstOrNew(['persona_id' => $persona->id]);
+            $data->codigo       = 'C'.$request->nro_documento;
+            $data->persona_id   = $persona->id;
             $data->save();
             // if ((int) $request->id == 0) {
             //     $data->fecha_registro       = date('Y-m-d H:i:s');
@@ -79,9 +92,10 @@ class ClienteController extends Controller
     }
 
     function editar($id) {
-        $data = Cliente::find($id);
+        $cliente = Cliente::find($id);
+        $persona = Persona::find($cliente->persona_id);
         // LogActividades::guardar(Auth()->user()->id, 6, 'FORMULARIO EMPRESA', $data->getTable(), $data, NULL, 'SELECCIONO UNA EMPRESA PARA MODIFICARLO');
-        return response()->json($data,200);
+        return response()->json(["cliente"=>$cliente, "persona"=>$persona],200);
     }
 
     function eliminar($id) {

@@ -113,16 +113,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="documento_id">Documentos</label>
-                                    <input id="documento_id" class="form-control form-control-sm" type="text" name="documento_id">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="nro_documento">N° Documento</label>
-                                    <select id="nro_documento" class="form-select form-select-sm mb-3 shadow-none" name="nro_documento" required>
+                                    <label for="documento_id">Tipo de Documento</label>
+                                    <select id="documento_id" class="form-select form-select-sm mb-3 shadow-none" name="documento_id" required>
                                         <option value="">Seleccione...</option>
                                         @foreach ($tipo_documentos as $value)
                                         <option value="{{$value->id}}">{{$value->codigo . ' - ' .$value->nombre}}</option>
@@ -131,6 +123,16 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="nro_documento">N° Documento</label>
+                                    <input id="nro_documento" class="form-control form-control-sm" type="text" name="nro_documento">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">

@@ -20,4 +20,8 @@ class Persona extends Model
     {
         return $this->belongsTo(Estado::class, 'estado');
     }
+    public function documento(): BelongsTo
+    {
+        return $this->belongsTo(TipoDocumento::class);
+    }
 }

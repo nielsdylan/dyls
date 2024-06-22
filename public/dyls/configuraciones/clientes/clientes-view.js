@@ -118,10 +118,19 @@ class ClientesView {
             e.preventDefault();
             $("#guardar-modal")[0].reset();
             let id = $(e.currentTarget).attr('data-id');
+
+            $('#nivel-modal').find('select').find('option').removeAttr('selected');
             this.model.editar(id).then((respuesta) => {
                 $('#nivel-modal').find('#nivel-titulo').text('Editar Cliente');
-                $('#nivel-modal').find('[name="id"]').val(respuesta.id);
-                $('#nivel-modal').find('[name="nombre"]').val(respuesta.nombre);
+
+                $('#nivel-modal').find('[name="id"]').val(respuesta.cliente.id);
+
+                $('#nivel-modal').find('[name="documento_id"]').find('[value="'+respuesta.persona.documento_id+'"]').attr('selected','true');
+                $('#nivel-modal').find('[name="nro_documento"]').val(respuesta.persona.nro_documento);
+                $('#nivel-modal').find('[name="apellido_paterno"]').val(respuesta.persona.apellido_paterno);
+                $('#nivel-modal').find('[name="apellido_materno"]').val(respuesta.persona.apellido_materno);
+                $('#nivel-modal').find('[name="nombres"]').val(respuesta.persona.nombres);
+
                 $('#nivel-modal').modal('show');
                 $('#tabla-data').DataTable().ajax.reload();
             }).fail((respuesta) => {

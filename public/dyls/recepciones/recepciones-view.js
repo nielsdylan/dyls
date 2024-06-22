@@ -98,15 +98,13 @@ class RecepcionesView {
             // $('#nivel-modal').find('#nivel-titulo').text('Nueva Tarifa');
 
         // });
-        $('#guardar-modal').submit((e) => {
+        $('#guardar').submit((e) => {
             e.preventDefault();
 
             let data = $(e.currentTarget).serialize();
 
             this.model.guardar(data).then((respuesta) => {
-
-                $('#nivel-modal').modal('hide');
-                $('#tabla-data').DataTable().ajax.reload();
+                console.log(respuesta);
             }).fail((respuesta) => {
                 console.log(respuesta);
             }).always(() => {
