@@ -5,6 +5,7 @@ namespace App\Http\Controllers\dyls;
 use App\Http\Controllers\Controller;
 use App\Models\Configuraciones\Cliente;
 use App\Models\Recepcion;
+use App\Models\RecepcionDetalle;
 use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -55,17 +56,34 @@ class RecepcionController extends Controller
     }
     public function formulario($id){
         $recepcion = Recepcion::find($id);
+        $detalle = RecepcionDetalle::where('recepcion_id',$id)->first();
         $clientes = Cliente::where('estado_id','!=',2)->get();
         return view('dyls.recepciones.formulario', get_defined_vars());
         // return $id;
     }
     public function guardar(Request $request)
     {
-        return $request;exit;
-        try {
-            $data = Recepcion::firstOrNew(['id' => $request->id]);
-            $data->nombre   = $request->nombre;
+        // return $request;exit;
+        // try {
+            $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
+            $recepcion->estado_id = 5;
+            $recepcion->save();
+            
+            $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $request->recepcion_id]);
+            $data->recepcion_id     = $request->recepcion_id;
+            $data->cliente_id       = $request->cliente_id;
+            $data->fecha_entrada    = $request->fecha_entrada;
+            $data->fecha_salida     = $request->fecha_salida;
+            $data->hora_entrada     = date("H:i");
+            $data->hora_salida      = $request->hora_salida;
+            $data->adelanto         = $request->adelanto;
+            $data->saldo            = $request->saldo;
+            $data->total            = $recepcion->habitaciones->precio;
+            $data->descripcion      = $request->descripcion;
+            $data->estado_id        = 5;
             $data->save();
+
+            
             // if ((int) $request->id == 0) {
             //     $data->fecha_registro       = date('Y-m-d H:i:s');
             //     $data->created_at           = date('Y-m-d H:i:s');
@@ -80,9 +98,9 @@ class RecepcionController extends Controller
             //     LogActividades::guardar(Auth()->user()->id, 4, 'MODIFICO UNA EMPRESA', $data->getTable(), $data_old, $data, 'SE A MODIFICADO UNA EMPRESA');
             // }
             $respuesta = array("titulo" => "Éxito", "mensaje" => "Se guardo con éxito", "tipo" => "success");
-        } catch (Exception $ex) {
-            $respuesta = array("titulo" => "Error", "mensaje" => "Hubo un problema al registrar. Por favor intente de nuevo, si persiste comunicarse con su area de TI", "tipo" => "error", "ex" => $ex);
-        }
+        // } catch (Exception $ex) {
+        //     $respuesta = array("titulo" => "Error", "mensaje" => "Hubo un problema al registrar. Por favor intente de nuevo, si persiste comunicarse con su area de TI", "tipo" => "error", "ex" => $ex);
+        // }
         return response()->json($respuesta, 200);
     }
 

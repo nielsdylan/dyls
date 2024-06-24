@@ -111,11 +111,11 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ asset('dyls/recepciones/recepciones-model.js') }}"></script>
-    <script src="{{ asset('dyls/recepciones/recepciones-view.js') }}"></script>
+    {{-- <script src="{{ asset('dyls/recepciones/recepciones-model.js') }}"></script>
+    <script src="{{ asset('dyls/recepciones/recepciones-view.js') }}"></script> --}}
     <script>
-        const view = new RecepcionesView(new RecepcionesModel(token));
+        // const view = new RecepcionesView(new RecepcionesModel(token));
         // view.listar();
-        view.eventos();
+        // view.eventos();
     </script>
 @endsection

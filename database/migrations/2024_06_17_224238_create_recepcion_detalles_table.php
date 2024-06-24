@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('recepcion_detalles', function (Blueprint $table) {
             $table->id();
             $table->integer('recepcion_id')->nullable();
+            $table->integer('cliente_id')->nullable();
             $table->date('fecha_entrada')->nullable();
             $table->date('fecha_salida')->nullable();
             $table->time('hora_entrada')->nullable();
