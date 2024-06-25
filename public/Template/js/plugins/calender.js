@@ -172,7 +172,7 @@ if (document.querySelectorAll('#calendar1').length) {
   });
   calendar1.render();
   });
-  
+
 }
 
 })(jQuery);

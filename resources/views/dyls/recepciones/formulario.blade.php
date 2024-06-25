@@ -146,7 +146,7 @@
                                 <div class="form-group">
                                     <label for="fecha_salida">Fecha de salida</label>
                                     <input id="fecha_salida" class="form-control" type="date" name="fecha_salida" value="{{ ($detalle?$detalle->fecha_salida:date("Y-m-d",strtotime(date("Y-m-d")."+ 1 days"))) }}" required>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -174,7 +174,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="saldo">Salto</label>
+                                    <label for="saldo">Saldo</label>
                                     {{-- <input type="hidden" name="saldo_total" value="{{ ($detalle?$detalle->saldo:$recepcion->habitaciones->precio) }}"> --}}
                                     <input type="hidden" name="saldo" value="{{ ($detalle?$detalle->saldo:$recepcion->habitaciones->precio) }}">
                                     <input type="hidden" name="total" value="{{ ($detalle?$detalle->total:$recepcion->habitaciones->precio) }}">

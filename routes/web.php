@@ -10,6 +10,7 @@ use App\Http\Controllers\dyls\configuraciones\TarifaController;
 use App\Http\Controllers\dyls\configuraciones\UsuarioController;
 use App\Http\Controllers\dyls\DashboardController;
 use App\Http\Controllers\dyls\RecepcionController;
+use App\Http\Controllers\dyls\ReservasController;
 // use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Reservas\CalendarioController;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::name('dyls.')->prefix('dyls')->group(function () {
         Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
         Route::name('reservas.')->prefix('reservas')->group(function () {
-            Route::get('calendario', [CalendarioController::class, 'calendario'])->name('calendario');
+            Route::get('calendario', [ReservasController::class, 'calendario'])->name('calendario');
         });
 
         Route::name('recepcion.')->prefix('recepcion')->group(function () {
