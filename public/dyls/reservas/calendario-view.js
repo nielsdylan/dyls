@@ -182,12 +182,24 @@ class CalendarioView {
             // $('#nivel-modal').find('#nivel-titulo').text('Nueva Tarifa');
 
         // });
-        $('#guardar').submit((e) => {
+        $('#guardar-modal').submit((e) => {
             e.preventDefault();
 
             let data = $(e.currentTarget).serialize();
 
             this.model.guardar(data).then((respuesta) => {
+                console.log(respuesta);
+            }).fail((respuesta) => {
+                console.log(respuesta);
+            }).always(() => {
+            });
+        });
+        $('[name="recepcion_id"]').change((e) => {
+            e.preventDefault();
+            // let id = $(e.currentTarget).val();
+            let id = $(e.currentTarget).attr('data-habitacion');
+            console.log(this.model);
+            this.model.habitacion(id).then((respuesta) => {
                 console.log(respuesta);
             }).fail((respuesta) => {
                 console.log(respuesta);

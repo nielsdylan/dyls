@@ -21,6 +21,7 @@ class PersonaSeeder extends Seeder
             'nro_documento'     => '74250891',
             'documento_id'      => 1,
             'nombres'           => 'NIELS DYLAN',
+            'telefono'          => '123456789',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -31,6 +32,7 @@ class PersonaSeeder extends Seeder
             'nro_documento'     => '12345678',
             'documento_id'      => 1,
             'nombres'           => 'JUAN',
+            'telefono'          => '654324567',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -41,6 +43,7 @@ class PersonaSeeder extends Seeder
             'nro_documento'     => '87654321',
             'documento_id'      => 1,
             'nombres'           => 'DIEGO ROGELIO',
+            'telefono'          => '369852147',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -51,6 +54,7 @@ class PersonaSeeder extends Seeder
             'nro_documento'     => '23145678',
             'documento_id'      => 1,
             'nombres'           => 'LUISA SOFIA',
+            'telefono'          => '987456123',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);

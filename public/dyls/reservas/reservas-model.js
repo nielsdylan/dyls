@@ -6,7 +6,7 @@ class ReservasModel {
 
     guardar = (data) => {
         return $.ajax({
-            url: route("dyls.recepcion.guardar"),
+            url: route("dyls.reservas.guardar"),
             type: "POST",
             dataType: "JSON",
             // processData: false,
@@ -16,7 +16,7 @@ class ReservasModel {
     }
     editar = (id) => {
         return $.ajax({
-            url: route("dyls.recepcion.editar", {id: id}),
+            url: route("dyls.reservas.editar", {id: id}),
             type: "GET",
             dataType: "JSON",
             data: { _token: this.token },
@@ -24,8 +24,17 @@ class ReservasModel {
     }
     eliminar = (id) => {
         return $.ajax({
-            url: route("dyls.recepcion.eliminar", {id: id}),
+            url: route("dyls.reservas.eliminar", {id: id}),
             type: "PUT",
+            dataType: "JSON",
+            data: { _token: this.token },
+        });
+    }
+
+    habitacion = (id) => {
+        return $.ajax({
+            url: route("dyls.configuraciones.habitaciones.editar", {id: id}),
+            type: "GET",
             dataType: "JSON",
             data: { _token: this.token },
         });

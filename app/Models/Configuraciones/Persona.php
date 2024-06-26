@@ -11,7 +11,7 @@ class Persona extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'personas';
-    protected $fillable = ['apellido_paterno', 'apellido_materno', 'nro_documento', 'documento_id', 'nombres', 'estado_id'
+    protected $fillable = ['apellido_paterno', 'apellido_materno', 'nro_documento', 'documento_id', 'nombres', 'telefono', 'estado_id'
         // ,'created_id', 'updated_id', 'deleted_id'
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];

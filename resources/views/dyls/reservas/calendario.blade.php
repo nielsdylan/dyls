@@ -106,8 +106,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="apellido_paterno">Apellido Paterno</label>
-                                    <input id="apellido_paterno" class="form-control form-control-sm" type="text" name="apellido_paterno"
-                                        required>
+                                    <input id="apellido_paterno" class="form-control form-control-sm" type="text" name="apellido_paterno" required>
                                 </div>
                             </div>
                         </div>
@@ -128,6 +127,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="telefono">Telefono</label>
+                                    <input id="telefono" class="form-control form-control-sm" type="text" name="telefono" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="recepcion_id">Habitaciones</label>
+                                    <select id="recepcion_id" class="form-select form-select-sm mb-3 shadow-none" name="recepcion_id" required>
+                                        <option value="">Seleccione...</option>
+                                        @foreach ($recepciones as $value)
+                                        <option value="{{$value->id}}" data-habitacion="{{$value->habitaciones->id}}">{{$value->habitaciones->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -202,6 +224,6 @@
     <script>
         const view = new CalendarioView(new ReservasModel(token));
         view.calendario();
-        // view.eventos();
+        view.eventos();
     </script>
 @endsection

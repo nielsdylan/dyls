@@ -65,6 +65,7 @@ class ClienteController extends Controller
             $persona->nro_documento    = $request->nro_documento;
             $persona->documento_id     = $request->documento_id;
             $persona->nombres          = $request->nombres;
+            $persona->telefono          = $request->telefono;
             $persona->save();
 
             $data = Cliente::firstOrNew(['persona_id' => $persona->id]);

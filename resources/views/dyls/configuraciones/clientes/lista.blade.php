@@ -159,6 +159,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="telefono">Telefono</label>
+                                    <input id="telefono" class="form-control form-control-sm" type="text" name="telefono"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-sm">Guardar</button>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nro_documento')->nullable();
             $table->integer('documento_id')->nullable();
             $table->string('nombres')->nullable();
+            $table->string('telefono')->nullable();
             $table->integer('estado_id')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();

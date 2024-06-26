@@ -130,6 +130,7 @@ class ClientesView {
                 $('#nivel-modal').find('[name="apellido_paterno"]').val(respuesta.persona.apellido_paterno);
                 $('#nivel-modal').find('[name="apellido_materno"]').val(respuesta.persona.apellido_materno);
                 $('#nivel-modal').find('[name="nombres"]').val(respuesta.persona.nombres);
+                $('#nivel-modal').find('[name="telefono"]').val(respuesta.persona.telefono);
 
                 $('#nivel-modal').modal('show');
                 $('#tabla-data').DataTable().ajax.reload();
