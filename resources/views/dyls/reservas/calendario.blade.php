@@ -191,6 +191,7 @@
                                 <div class="form-group">
                                     <label for="saldo">Saldo</label>
                                     <input type="hidden" name="saldo" value="">
+                                    <input type="hidden" name="total" value="">
                                     <input id="saldo" class="form-control form-control-sm" type="text" placeholder="0.00" value="" disabled>
                                 </div>
                             </div>

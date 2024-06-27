@@ -41,7 +41,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
         Route::name('reservas.')->prefix('reservas')->group(function () {
             Route::get('calendario', [ReservasController::class, 'calendario'])->name('calendario');
-            Route::get('habitacion/{id}', [ReservasController::class, 'habitacion'])->name('habitacion');
             Route::post('guardar', [ReservasController::class, 'guardar'])->name('guardar');
         });
 

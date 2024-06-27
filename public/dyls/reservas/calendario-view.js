@@ -173,15 +173,6 @@ class CalendarioView {
 
     eventos = () => {
 
-        // $('.recepcion').click((e) => {
-        //     e.preventDefault();
-        //     console.log('click');
-            // $("#guardar-modal")[0].reset();
-            // $('#nivel-modal').modal('show');
-            // $('#nivel-modal').find('[name="id"]').val(0);
-            // $('#nivel-modal').find('#nivel-titulo').text('Nueva Tarifa');
-
-        // });
         $('#guardar-modal').submit((e) => {
             e.preventDefault();
 
@@ -194,27 +185,40 @@ class CalendarioView {
             }).always(() => {
             });
         });
+
         $('[name="recepcion_id"]').change((e) => {
-            e.preventDefault();
-            // let id = $(e.currentTarget).val();
-            let id = $(e.currentTarget).attr('data-habitacion');
-            console.log(this.model);
+            // e.preventDefault();
+
+            let id = $(e.currentTarget).val();
+            let habitacion_id = $(e.currentTarget).find('option[value="'+id+'"]').attr('data-habitacion');
+
             this.model.habitacion(id).then((respuesta) => {
-                console.log(respuesta);
+                $('[name="saldo"]').val(respuesta.precio);
+                $('[name="total"]').val(respuesta.precio);
+                $('#guardar-modal #saldo').val(respuesta.precio);
             }).fail((respuesta) => {
                 console.log(respuesta);
             }).always(() => {
             });
         });
-        $('#guardar [name="adelanto"]').change(function (e) {
+
+        $('#guardar-modal [name="adelanto"]').change(function (e) {
             e.preventDefault();
             let adelanto = $(e.currentTarget).val();
-            let total = $('#guardar [name="total"]').val();
+            let total = $('#guardar-modal [name="total"]').val();
             let saldo = total-adelanto;
-            $('#guardar [name="saldo"]').val(saldo);
-            $('#guardar #saldo').val(saldo);
-            console.log(total-adelanto);
+            $('#guardar-modal [name="saldo"]').val(saldo);
+            $('#guardar-modal #saldo').val(saldo);
         });
+        // $('#guardar [name="adelanto"]').change(function (e) {
+        //     e.preventDefault();
+        //     let adelanto = $(e.currentTarget).val();
+        //     let total = $('#guardar [name="total"]').val();
+        //     let saldo = total-adelanto;
+        //     $('#guardar [name="saldo"]').val(saldo);
+        //     $('#guardar #saldo').val(saldo);
+        //     console.log(total-adelanto);
+        // });
 
     }
 }

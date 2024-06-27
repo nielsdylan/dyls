@@ -68,7 +68,7 @@ class RecepcionController extends Controller
             $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
             $recepcion->estado_id = 5;
             $recepcion->save();
-            
+
             $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $request->recepcion_id]);
             $data->recepcion_id     = $request->recepcion_id;
             $data->cliente_id       = $request->cliente_id;
@@ -83,7 +83,7 @@ class RecepcionController extends Controller
             $data->estado_id        = 5;
             $data->save();
 
-            
+
             // if ((int) $request->id == 0) {
             //     $data->fecha_registro       = date('Y-m-d H:i:s');
             //     $data->created_at           = date('Y-m-d H:i:s');

@@ -7,6 +7,7 @@ use App\Models\Configuraciones\Cliente;
 use App\Models\Configuraciones\Persona;
 use App\Models\Configuraciones\TipoDocumento;
 use App\Models\Recepcion;
+use App\Models\RecepcionDetalle;
 use Illuminate\Http\Request;
 
 class ReservasController extends Controller
@@ -18,7 +19,13 @@ class ReservasController extends Controller
         return view('dyls.reservas.calendario', get_defined_vars());
     }
     public function guardar(Request $request) {
-        return $request;
+
+        $verificacion = Recepcion::where('id',$request->recepcion_id)->first();
+
+        if($verificacion->estado_id !== 3){
+            return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
+        }
+
         $persona = new Persona();
         $persona->apellido_paterno  = $request->apellido_paterno;
         $persona->apellido_materno  = $request->apellido_materno;
@@ -28,13 +35,28 @@ class ReservasController extends Controller
         $persona->telefono          = $request->telefono;
         $persona->save();
 
-        $data = new Cliente();
-        $data->codigo       = 'C'.$request->nro_documento;
-        $data->persona_id   = $persona->id;
-        $data->save();
+        $cliente = new Cliente();
+        $cliente->codigo       = 'C'.$request->nro_documento;
+        $cliente->persona_id   = $persona->id;
+        $cliente->save();
 
-    }
-    public function habitacion($id) {
-        return $id;
+        $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
+        $recepcion->estado_id = 4;
+        $recepcion->save();
+
+        $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $request->recepcion_id]);
+        $data->recepcion_id     = $request->recepcion_id;
+        $data->cliente_id       = $cliente->id;
+        $data->fecha_entrada    = $request->fecha_entrada;
+        $data->fecha_salida     = $request->fecha_salida;
+        $data->hora_entrada     = $request->hora_entrada;
+        $data->hora_salida      = $request->hora_salida;
+        $data->adelanto         = $request->adelanto;
+        $data->saldo            = $request->saldo;
+        $data->total            = $recepcion->habitaciones->precio;
+        // $data->descripcion      = $request->descripcion;
+        $data->estado_id        = 4;
+        $data->save();
+        return response()->json(["titulo" => "Éxito", "mensaje" => "Se guardo con éxito", "tipo" => "success"],200);
     }
 }

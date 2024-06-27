@@ -36,6 +36,8 @@ class ReservasModel {
             url: route("dyls.configuraciones.habitaciones.editar", {id: id}),
             type: "GET",
             dataType: "JSON",
+            // processData: false,
+            // contentType: false,
             data: { _token: this.token },
         });
     }
