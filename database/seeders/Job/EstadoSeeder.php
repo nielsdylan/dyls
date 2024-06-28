@@ -19,6 +19,10 @@ class EstadoSeeder extends Seeder
             'nombre'        => 'ACTIVO',
             'descripcion'   => 'ES CUANDO EL REGISTRO SE ENCUENTRA EN CIRCULACIÓN.',
             'color'         => 'success',
+            'color_exadecimal'  => '#1AA053',
+            'background_color'  => '#D5EBDF',
+            'text_color'        => '#1AA053',
+            'border_color'      => '#1AA053',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -27,6 +31,11 @@ class EstadoSeeder extends Seeder
             'nombre'        => 'ELIMINADO',
             'descripcion'   => 'ES CUANDO EL REGISTRO NO SE ENCUENTRA EN CIRCULACIÓN.',
             'color'         => 'danger',
+
+            'color_exadecimal'  => '#C03221',
+            'background_color'  => '#F2D6D3',
+            'text_color'        => '#C03221',
+            'border_color'      => '#C03221',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -35,6 +44,10 @@ class EstadoSeeder extends Seeder
             'nombre'        => 'DISPONIBLE',
             'descripcion'   => 'ES CUANDO LA HABITACIÓN ESTA DISPONIBLE PARA EL ALQUILER.',
             'color'         => 'success',
+            'color_exadecimal'  => '#1AA053',
+            'background_color'  => '#D5EBDF',
+            'text_color'        => '#1AA053',
+            'border_color'      => '#1AA053',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -43,6 +56,10 @@ class EstadoSeeder extends Seeder
             'nombre'        => 'RESERVACIÓN',
             'descripcion'   => 'ES CUANDO LA HABITACIÓN SE ENCUENTRA SEPARADA PARA UN CLIENTE.',
             'color'         => 'warning',
+            'color_exadecimal'  => '#F16A1B',
+            'background_color'  => '#FCE1D1',
+            'text_color'        => '#F16A1B',
+            'border_color'      => '#F16A1B',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -51,6 +68,10 @@ class EstadoSeeder extends Seeder
             'nombre'        => 'OCUPADA',
             'descripcion'   => 'ES CUANDO LA HABITACIÓN FUE ALQUILADA A UN CLIENTE.',
             'color'         => 'danger',
+            'color_exadecimal'  => '#C03221',
+            'background_color'  => '#F2D6D3',
+            'text_color'        => '#C03221',
+            'border_color'      => '#C03221',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -59,6 +80,10 @@ class EstadoSeeder extends Seeder
             'nombre'        => 'LIMPIEZA',
             'descripcion'   => 'ES CUANDO LA HABITACIÓN SE RELIZA UNA LIMPIEZA .',
             'color'         => 'info',
+            'color_exadecimal'  => '#C03221',
+            'background_color'  => '#F2D6D3',
+            'text_color'        => '#C03221',
+            'border_color'      => '#C03221',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -67,6 +92,10 @@ class EstadoSeeder extends Seeder
             'nombre'        => 'PAGADO',
             'descripcion'   => 'ES CUANDO LA HABITACION SE ENCUENTRA PAGADA EN SU TOTALIDAD .',
             'color'         => 'info',
+            'color_exadecimal'  => '#C03221',
+            'background_color'  => '#F2D6D3',
+            'text_color'        => '#C03221',
+            'border_color'      => '#C03221',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
@@ -75,6 +104,10 @@ class EstadoSeeder extends Seeder
             'nombre'        => 'FINALIZADO',
             'descripcion'   => 'ES CUANDO EL TIEMPO DEL ALQUILER DE LA HABITACIÓN LLEGA A SU FIN.',
             'color'         => 'info',
+            'color_exadecimal'  => '#C03221',
+            'background_color'  => '#F2D6D3',
+            'text_color'        => '#C03221',
+            'border_color'      => '#C03221',
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);

@@ -41,7 +41,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
         Route::name('reservas.')->prefix('reservas')->group(function () {
             Route::get('calendario', [ReservasController::class, 'calendario'])->name('calendario');
+            Route::get('editar/{id}', [ReservasController::class, 'editar'])->name('editar');
             Route::post('guardar', [ReservasController::class, 'guardar'])->name('guardar');
+            Route::get('eventos', [ReservasController::class, 'eventos'])->name('eventos');
         });
 
         Route::name('recepcion.')->prefix('recepcion')->group(function () {
@@ -95,6 +97,22 @@ Route::middleware(['auth'])->group(function () {
                 Route::put('eliminar/{id}', [TarifaController::class, 'eliminar'])->name('eliminar');
             });
             Route::name('clientes.')->prefix('clientes')->group(function () {
+                Route::get('lista', [ClienteController::class, 'lista'])->name('lista');
+                Route::post('listar', [ClienteController::class, 'listar'])->name('listar');
+                Route::post('guardar', [ClienteController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [ClienteController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [ClienteController::class, 'eliminar'])->name('eliminar');
+            });
+        });
+        Route::name('punto-venta.')->prefix('punto-venta')->group(function () {
+            Route::name('ventas.')->prefix('ventas')->group(function () {
+                Route::get('lista', [ClienteController::class, 'lista'])->name('lista');
+                Route::post('listar', [ClienteController::class, 'listar'])->name('listar');
+                Route::post('guardar', [ClienteController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [ClienteController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [ClienteController::class, 'eliminar'])->name('eliminar');
+            });
+            Route::name('productos.')->prefix('productos')->group(function () {
                 Route::get('lista', [ClienteController::class, 'lista'])->name('lista');
                 Route::post('listar', [ClienteController::class, 'listar'])->name('listar');
                 Route::post('guardar', [ClienteController::class, 'guardar'])->name('guardar');

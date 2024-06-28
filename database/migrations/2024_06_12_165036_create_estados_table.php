@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('color');
+            $table->string('color_exadecimal');
+            $table->string('background_color');
+            $table->string('text_color');
+            $table->string('border_color');
             $table->timestamps();
             $table->softDeletes();
         });

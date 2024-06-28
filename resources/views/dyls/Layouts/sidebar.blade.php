@@ -183,6 +183,54 @@
                         </li>
                     </ul>
                 </li>
+
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu-punto-venta" role="button" aria-expanded="false" aria-controls="horizontal-menu-punto-venta">
+                        <i class="icon" data-bs-toggle="tooltip" title="Configuración" data-bs-placement="right">
+                            <svg width="20" class="icon-20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.4" d="M13.6663 6.99992C13.6663 10.6826 10.6817 13.6666 6.99967 13.6666C3.31767 13.6666 0.333008 10.6826 0.333008 6.99992C0.333008 3.31859 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31859 13.6663 6.99992Z" fill="currentColor"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.01351 6.20239C3.57284 6.20239 3.21484 6.56039 3.21484 6.99973C3.21484 7.43973 3.57284 7.79839 4.01351 7.79839C4.45418 7.79839 4.81218 7.43973 4.81218 6.99973C4.81218 6.56039 4.45418 6.20239 4.01351 6.20239ZM6.99958 6.20239C6.55891 6.20239 6.20091 6.56039 6.20091 6.99973C6.20091 7.43973 6.55891 7.79839 6.99958 7.79839C7.44024 7.79839 7.79824 7.43973 7.79824 6.99973C7.79824 6.56039 7.44024 6.20239 6.99958 6.20239ZM9.18718 6.99973C9.18718 6.56039 9.54518 6.20239 9.98584 6.20239C10.4265 6.20239 10.7845 6.56039 10.7845 6.99973C10.7845 7.43973 10.4265 7.79839 9.98584 7.79839C9.54518 7.79839 9.18718 7.43973 9.18718 6.99973Z" fill="currentColor"/>
+                            </svg>
+                        </i>
+                        <span class="item-name">Punto de Venta</span>
+                        <i class="right-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" class="icon-18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </i>
+                    </a>
+                    <ul class="sub-nav collapse" id="horizontal-menu-punto-venta" data-bs-parent="#sidebar-menu">
+                        <li class="nav-item">
+                            <a class="nav-link " href="{{ route('dyls.configuraciones.niveles.lista') }}">
+                              <i class="icon">
+                                    <svg class="icon-10" width="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                        </g>
+                                    </svg>
+                                </i>
+                              <i class="sidenav-mini-icon" data-bs-toggle="tooltip" title="Nivel" data-bs-placement="right"> N </i>
+                              <span class="item-name"> Venta </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="{{ route('dyls.configuraciones.niveles.lista') }}">
+                              <i class="icon">
+                                    <svg class="icon-10" width="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                        </g>
+                                    </svg>
+                                </i>
+                              <i class="sidenav-mini-icon" data-bs-toggle="tooltip" title="Nivel" data-bs-placement="right"> N </i>
+                              <span class="item-name"> Productos </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
 
             <!-- Sidebar Menu End -->
