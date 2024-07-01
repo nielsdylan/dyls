@@ -42,4 +42,15 @@ class ReservasModel {
         });
     }
 
+    guardarCliente = (data) => {
+        return $.ajax({
+            url: route("dyls.configuraciones.clientes.guardar"),
+            type: "POST",
+            dataType: "JSON",
+            // processData: false,
+            // contentType: false,
+            data: data,
+        });
+    }
+    
 }

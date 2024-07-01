@@ -30,5 +30,12 @@ class ClientesModel {
             data: { _token: this.token },
         });
     }
-
+    buscadorNumero = (numero) => {
+        return $.ajax({
+            url: route("dyls.configuraciones.clientes.buscador-numero", {numero: numero}),
+            type: "GET",
+            dataType: "JSON",
+            data: { _token: this.token },
+        });
+    }
 }

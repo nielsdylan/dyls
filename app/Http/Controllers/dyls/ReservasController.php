@@ -16,6 +16,7 @@ class ReservasController extends Controller
     public function calendario() {
         $tipo_documentos = TipoDocumento::where('estado_id','!=',2)->get();
         $recepciones = Recepcion::where('estado_id',3)->get();
+        $clientes = Cliente::where('estado_id','!=',2)->get();
         return view('dyls.reservas.calendario', get_defined_vars());
     }
     public function guardar(Request $request) {

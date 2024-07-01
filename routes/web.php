@@ -102,6 +102,8 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('guardar', [ClienteController::class, 'guardar'])->name('guardar');
                 Route::get('editar/{id}', [ClienteController::class, 'editar'])->name('editar');
                 Route::put('eliminar/{id}', [ClienteController::class, 'eliminar'])->name('eliminar');
+
+                Route::get('buscador-numero/{numero}', [ClienteController::class, 'buscadorNumero'])->name('buscador-numero');
             });
         });
         Route::name('punto-venta.')->prefix('punto-venta')->group(function () {

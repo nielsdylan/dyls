@@ -72,19 +72,6 @@ class ClienteController extends Controller
             $data->codigo       = 'C'.$request->nro_documento;
             $data->persona_id   = $persona->id;
             $data->save();
-            // if ((int) $request->id == 0) {
-            //     $data->fecha_registro       = date('Y-m-d H:i:s');
-            //     $data->created_at           = date('Y-m-d H:i:s');
-            //     $data->created_id           = Auth()->user()->id;
-            //     $data->save();
-            //     LogActividades::guardar(Auth()->user()->id, 3, 'REGISTRO UNA EMPRESA', $data->getTable(), NULL, $data, 'SE A CREADO UN NUEVO EMPRESA EN EL FORMULARIO ');
-            // } else {
-            //     $data_old = Empresas::find($request->id);
-            //     $data->updated_at   = date('Y-m-d H:i:s');
-            //     $data->updated_id   = Auth()->user()->id;
-            //     $data->save();
-            //     LogActividades::guardar(Auth()->user()->id, 4, 'MODIFICO UNA EMPRESA', $data->getTable(), $data_old, $data, 'SE A MODIFICADO UNA EMPRESA');
-            // }
             $respuesta = array("titulo" => "Éxito", "mensaje" => "Se guardo con éxito", "tipo" => "success");
         } catch (Exception $ex) {
             $respuesta = array("titulo" => "Error", "mensaje" => "Hubo un problema al registrar. Por favor intente de nuevo, si persiste comunicarse con su area de TI", "tipo" => "error", "ex" => $ex);
@@ -107,5 +94,17 @@ class ClienteController extends Controller
         // LogActividades::guardar(Auth()->user()->id, 5, 'ELIMINO UNA EMPRESA', $data->getTable(), $data, NULL, 'ELIMINO UN REGISTRO DE LA LISTA DE EMPRESAS');
         $respuesta = array("titulo"=>"Éxito","mensaje"=>"Se elimino con éxito","tipo"=>"success");
         return response()->json($respuesta,200);
+    }
+    public function buscadorNumero($numero){
+        $persona = Persona::where('nro_documento',$numero)->first();
+        $cliente = array();
+        $estado = false;
+
+        if ($persona) {
+            $cliente = Cliente::where('persona_id',$persona->id)->first();
+            $estado = true;
+        }
+
+        return response()->json(["cliente"=>$cliente,"persona"=>$persona,"estado"=>$estado],200);
     }
 }

@@ -83,16 +83,45 @@ class CalendarioView {
             $('#guardar-modal [name="saldo"]').val(saldo);
             $('#guardar-modal #saldo').val(saldo);
         });
-        // $('#guardar [name="adelanto"]').change(function (e) {
-        //     e.preventDefault();
-        //     let adelanto = $(e.currentTarget).val();
-        //     let total = $('#guardar [name="total"]').val();
-        //     let saldo = total-adelanto;
-        //     $('#guardar [name="saldo"]').val(saldo);
-        //     $('#guardar #saldo').val(saldo);
-        //     console.log(total-adelanto);
-        // });
+        
+        $('.agregar-cliente').click((e) => {
+            // e.preventDefault();
+            $('#formulario-cliente-modal').modal('show');
 
+        });
+        $('#guardar-cliente-modal').submit((e) => {
+            e.preventDefault();
+
+            let data = $(e.currentTarget).serialize();
+
+            this.model.guardarCliente(data).then((respuesta) => {
+                console.log(respuesta);
+            }).fail((respuesta) => {
+                console.log(respuesta);
+            }).always(() => {
+            });
+        });
+
+        $('.click-toast').click((e) => { 
+            e.preventDefault();
+
+            $('#toast-notificacion').removeClass('show');
+            $('#toast-notificacion').addClass('hide');
+            $('#toast-notificacion').removeAttr('style');
+
+
+            $('#toast-notificacion').removeClass('hide');
+            $('#toast-notificacion').addClass('show');
+            // $('#toast-notificacion').slideUp( 300 ).fadeIn( 400 );
+            $('#toast-notificacion').delay(5000).fadeOut(200);
+
+            setTimeout(function () {
+                $('#toast-notificacion').removeClass('show');
+                $('#toast-notificacion').addClass('hide');
+                $('#toast-notificacion').removeAttr('style');
+                
+            }, 6000);
+        });
     }
 }
 

@@ -54,6 +54,24 @@
     </div>
 @endsection
 @section('content')
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+    <div id="toast-notificacion" class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                <rect width="100%" height="100%" fill="#007aff"></rect>
+            </svg>
+            <strong class="me-auto">Bootstrap</strong>
+            {{-- <small>11 mins ago</small> --}}
+            <button type="button" class="ms-2 mb-1 btn-close" data-bs-dismiss="toast" aria-label="Close">
+            </button>
+        </div>
+        <div class="toast-body" >
+            Hello, world! This is a toast message.
+        </div>
+    </div>
+</div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card  ">
@@ -81,61 +99,17 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="documento_id">Tipo de Documento</label>
-                                    <select id="documento_id" class="form-select form-select-sm mb-3 shadow-none" name="documento_id" required>
-                                        <option value="">Seleccione...</option>
-                                        @foreach ($tipo_documentos as $value)
-                                        <option value="{{$value->id}}">{{$value->codigo . ' - ' .$value->nombre}}</option>
+                                <div class="input-group mb-3">
+                                    <select class="form-select form-select-sm" id="cliente_id" >
+                                        <option selected>Seleccione...</option>
+                                        @foreach ($clientes as $value)
+                                        <option value="{{$value->id}}"  >{{$value->persona->nro_documento . ' - ' .$value->persona->nombres }}</option>
                                         @endforeach
                                     </select>
+                                    <button class="btn btn-outline-success btn-sm agregar-cliente" type="button">Agregar</button>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="nro_documento">N° Documento</label>
-                                    <input id="nro_documento" class="form-control form-control-sm" type="text" name="nro_documento">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="apellido_paterno">Apellido Paterno</label>
-                                    <input id="apellido_paterno" class="form-control form-control-sm" type="text" name="apellido_paterno" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="apellido_materno">Apellido Materno</label>
-                                    <input id="apellido_materno" class="form-control form-control-sm" type="text" name="apellido_materno">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="nombres">Nombre</label>
-                                    <input id="nombres" class="form-control form-control-sm" type="text" name="nombres"
-                                        required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="telefono">Telefono</label>
-                                    <input id="telefono" class="form-control form-control-sm" type="text" name="telefono" required>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -207,6 +181,112 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="formulario-cliente-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nivel-titulo">Nuevo cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="" id="guardar-cliente-modal">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="id" value="0">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="documento_id">Tipo de Documento</label>
+                                        <select id="documento_id" class="form-select form-select-sm mb-3 shadow-none" name="documento_id" required>
+                                            <option value="">Seleccione...</option>
+                                            @foreach ($tipo_documentos as $value)
+                                            <option value="{{$value->id}}">{{$value->codigo . ' - ' .$value->nombre}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="nro_documento">N° Documento</label>
+                                        <input id="nro_documento" class="form-control form-control-sm" type="text" name="nro_documento">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="apellido_paterno">Apellido Paterno</label>
+                                        <input id="apellido_paterno" class="form-control form-control-sm" type="text" name="apellido_paterno"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="apellido_materno">Apellido Materno</label>
+                                        <input id="apellido_materno" class="form-control form-control-sm" type="text" name="apellido_materno">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="nombres">Nombre</label>
+                                        <input id="nombres" class="form-control form-control-sm" type="text" name="nombres"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="telefono">Telefono</label>
+                                        <input id="telefono" class="form-control form-control-sm" type="text" name="telefono"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-bs-dismiss="modal">Cerrar</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary click-toast">Show live toast</button>
+
+    {{-- <div id="toast-notificacion" class="toast fade hide bg-success text-white border-0 mt-3 position-fixed bottom-0 end-0 p-3" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                <rect width="100%" height="100%" fill="#fff"></rect>
+            </svg>
+            <strong class="me-auto text-white">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="ms-2 mb-1 btn-close btn-close-white text-white" data-dismiss="toast" aria-label="Close">
+            </button>
+        </div>
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+    </div> --}}
+
+
+    
+
 @endsection
 @section('script')
 
