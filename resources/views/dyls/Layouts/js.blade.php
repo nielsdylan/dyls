@@ -26,3 +26,5 @@
 <!-- qompacui Script -->
 <script src="{{ asset('Template/js/qompac-ui.js?v=1.0.1') }}" defer></script>
 <script src="{{ asset('Template/js/sidebar.js?v=1.0.1') }}" defer></script>
+
+<script src="{{ asset('dyls/iniciar.js') }}"></script>

@@ -61,6 +61,8 @@
     @include('dyls.Layouts.offcavas-configuracion')
     <!-- Settings sidebar end here -->
 
+    <div id="respuestas-alertas" class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;"></div>
+
     <a class="btn btn-fixed-end btn-warning btn-icon btn-setting" id="settingbutton" data-bs-toggle="offcanvas"
         data-bs-target="#live-customizer" role="button" aria-controls="live-customizer">
         <svg class="icon-24 animated-rotate" width="24" viewBox="0 0 24 24" fill="none"

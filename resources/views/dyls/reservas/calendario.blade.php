@@ -54,23 +54,7 @@
     </div>
 @endsection
 @section('content')
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
 
-    <div id="toast-notificacion" class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
-                <rect width="100%" height="100%" fill="#007aff"></rect>
-            </svg>
-            <strong class="me-auto">Bootstrap</strong>
-            {{-- <small>11 mins ago</small> --}}
-            <button type="button" class="ms-2 mb-1 btn-close" data-bs-dismiss="toast" aria-label="Close">
-            </button>
-        </div>
-        <div class="toast-body" >
-            Hello, world! This is a toast message.
-        </div>
-    </div>
-</div>
 
     <div class="row">
         <div class="col-lg-12">
@@ -209,7 +193,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -218,7 +202,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -269,23 +253,8 @@
 
     <button type="button" class="btn btn-primary click-toast">Show live toast</button>
 
-    {{-- <div id="toast-notificacion" class="toast fade hide bg-success text-white border-0 mt-3 position-fixed bottom-0 end-0 p-3" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-success text-white">
-            <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
-                <rect width="100%" height="100%" fill="#fff"></rect>
-            </svg>
-            <strong class="me-auto text-white">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="ms-2 mb-1 btn-close btn-close-white text-white" data-dismiss="toast" aria-label="Close">
-            </button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div> --}}
 
 
-    
 
 @endsection
 @section('script')

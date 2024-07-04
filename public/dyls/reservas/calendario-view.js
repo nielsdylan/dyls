@@ -83,7 +83,7 @@ class CalendarioView {
             $('#guardar-modal [name="saldo"]').val(saldo);
             $('#guardar-modal #saldo').val(saldo);
         });
-        
+
         $('.agregar-cliente').click((e) => {
             // e.preventDefault();
             $('#formulario-cliente-modal').modal('show');
@@ -102,25 +102,10 @@ class CalendarioView {
             });
         });
 
-        $('.click-toast').click((e) => { 
+        $('.click-toast').click((e) => {
             e.preventDefault();
 
-            $('#toast-notificacion').removeClass('show');
-            $('#toast-notificacion').addClass('hide');
-            $('#toast-notificacion').removeAttr('style');
-
-
-            $('#toast-notificacion').removeClass('hide');
-            $('#toast-notificacion').addClass('show');
-            // $('#toast-notificacion').slideUp( 300 ).fadeIn( 400 );
-            $('#toast-notificacion').delay(5000).fadeOut(200);
-
-            setTimeout(function () {
-                $('#toast-notificacion').removeClass('show');
-                $('#toast-notificacion').addClass('hide');
-                $('#toast-notificacion').removeAttr('style');
-                
-            }, 6000);
+            alertas('titulo', 'mensaje', 'warning');
         });
     }
 }
