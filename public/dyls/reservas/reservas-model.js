@@ -52,5 +52,13 @@ class ReservasModel {
             data: data,
         });
     }
-    
+
+    listarCombo = () => {
+        return $.ajax({
+            url: route("dyls.configuraciones.clientes.listar-combo"),
+            type: "GET",
+            dataType: "JSON",
+            data: { _token: this.token },
+        });
+    }
 }

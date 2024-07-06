@@ -104,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::put('eliminar/{id}', [ClienteController::class, 'eliminar'])->name('eliminar');
 
                 Route::get('buscador-numero/{numero}', [ClienteController::class, 'buscadorNumero'])->name('buscador-numero');
+                Route::get('listar-combo', [ClienteController::class, 'listarCombo'])->name('listar-combo');
             });
         });
         Route::name('punto-venta.')->prefix('punto-venta')->group(function () {

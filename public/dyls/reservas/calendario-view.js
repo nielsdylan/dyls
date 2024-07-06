@@ -93,9 +93,22 @@ class CalendarioView {
             e.preventDefault();
 
             let data = $(e.currentTarget).serialize();
-
+            let model = this.model;
             this.model.guardarCliente(data).then((respuesta) => {
-                console.log(respuesta);
+                // console.log(respuesta);
+                alertas(respuesta.titulo, respuesta.mensaje, respuesta.tipo, 5);
+                $('#formulario-cliente-modal').modal('hide');
+
+                model.listarCombo().then((respuesta) => {
+                    let option = '<option value="">Seleccione...</option>';
+                    $.each(respuesta, function (index, elemen) {
+                        option += '<option value="'+elemen.id+'">'+elemen.persona.nro_documento+'</option>';
+                    });
+                    $('#formulario-modal [name="cliente_id"]').html(option);
+                }).fail((respuesta) => {
+                    console.log(respuesta);
+                }).always(() => {
+                });
             }).fail((respuesta) => {
                 console.log(respuesta);
             }).always(() => {
@@ -105,7 +118,13 @@ class CalendarioView {
         $('.click-toast').click((e) => {
             e.preventDefault();
 
-            alertas('titulo', 'mensaje', 'warning');
+            // alertas('titulo', 'mensaje', 'warning', 5)
+            // .then(result => console.log("Tiradas correctas: ", result.value))
+            // .catch(err => console.error("Ha ocurrido algo: ", err.message));
+            alertas('titulo', 'mensaje', 'warning', 5);
+
+
+
         });
     }
 }

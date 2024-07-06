@@ -1,44 +1,27 @@
-$(document).ready(function () {
 
-});
+const  alertas = (titulo, mensaje, tipo) => {
 
-function notificacionToast(titulo, mensaje, tipo) {
-
-    // $('#toast-notificacion').delay(2000).fadeOut(200);
-
-    $('#toast-notificacion').removeClass('show');
-    $('#toast-notificacion').addClass('hide');
-    // $('#toast-notificacion').find('[data-bs-dismiss="toast"]').click();
-    $('#toast-notificacion').removeAttr('style');
-
-
-    $('#toast-notificacion').removeClass('hide');
-    $('#toast-notificacion').addClass('show');
-    // $('#toast-notificacion').delay(2000).fadeIn(200);
-    $('#toast-notificacion').slideDown( 300 ).fadeIn( 400 );
-
-    // $('#toast-notificacion').delay(2000).fadeOut(200);
-
-    // setTimeout(function () {
-    //     $('#toast-notificacion').removeClass('show');
-    //     $('#toast-notificacion').addClass('hide');
-    //     $('#toast-notificacion').removeAttr('style');
-
-    // }, 6000);
-
+    return new Promise( (resolve, reject) => {
+        const random = Math.random();
+        alerta = '';
+        alerta+='<div id="alerta-'+random+'" class="alert alert-bottom alert-'+tipo+' alert-dismissible fade show mb-3" role="alert">'
+            alerta+='<span><i class="fas fa-thumbs-up"></i>dd</span>'
+            alerta+='<span class="me-5"> '+mensaje+'</span>'
+            alerta+='<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-button="'+random+'"></button>'
+        alerta+='</div>';
+        $('#respuestas-alertas').append(alerta);
+        // console.log(random);
+        setTimeout(() => {
+            $('#respuestas-alertas [data-button="'+random+'"]').click();
+        }, 1500);
+    })
 }
-function alertas(titulo, mensaje, tipo) {
-    alerta = '';
-    // alerta+='<div class="alert alert-success alert-dismissible " role="alert">'
-    //     alerta+='<div>Nice, you triggered this alert message!</div>'
-    //     alerta+='<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'
-    // alerta+='</div>';
-
-    alerta+='<div class="alert alert-left alert-'+tipo+' alert-dismissible fade show mb-3" role="alert">'
-        alerta+='<span><i class="fas fa-thumbs-up"></i></span>'
-        alerta+='<span> This is a success alert—check it out!</span>'
-        alerta+='<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'
-    alerta+='</div>';
-    $('#respuestas-alertas').append(alerta);
-    console.log();
-}
+// alertas('titulo', 'mensaje', 'warning', 5)
+// .then(resultado => {
+//     console.log(resultado); // Se ejecutará en caso de pago exitoso
+//     // Aquí podríamos realizar acciones adicionales, como actualizar la base de datos, enviar un recibo por correo, etc.
+// })
+// .catch(error => {
+//     console.error(error.message); // Se ejecutará en caso de pago fallido
+//     // Aquí podemos ofrecer al usuario la opción de intentar nuevamente o mostrar un mensaje de error
+// });

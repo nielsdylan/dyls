@@ -107,4 +107,11 @@ class ClienteController extends Controller
 
         return response()->json(["cliente"=>$cliente,"persona"=>$persona,"estado"=>$estado],200);
     }
+    public function listarCombo() {
+        $clientes = Cliente::where('estado_id','!=',2)->get();
+        foreach ($clientes as $key => $value) {
+            $value->persona;
+        }
+        return response()->json($clientes,200);
+    }
 }

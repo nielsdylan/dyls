@@ -84,7 +84,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group mb-3">
-                                    <select class="form-select form-select-sm" id="cliente_id" >
+                                    <select class="form-select form-select-sm" id="cliente_id" name="cliente_id" >
                                         <option selected>Seleccione...</option>
                                         @foreach ($clientes as $value)
                                         <option value="{{$value->id}}"  >{{$value->persona->nro_documento . ' - ' .$value->persona->nombres }}</option>
@@ -250,8 +250,8 @@
             </div>
         </div>
     </div>
-
-    <button type="button" class="btn btn-primary click-toast">Show live toast</button>
+{{--
+    <button type="button" class="btn btn-primary click-toast">Show live toast</button> --}}
 
 
 
