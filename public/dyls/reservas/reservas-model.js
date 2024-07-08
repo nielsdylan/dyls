@@ -61,4 +61,12 @@ class ReservasModel {
             data: { _token: this.token },
         });
     }
+    cancelarReserva = (id) => {
+        return $.ajax({
+            url: route("dyls.reservas.cancelar", {id: id}),
+            type: "GET",
+            dataType: "JSON",
+            data: { _token: this.token },
+        });
+    }
 }

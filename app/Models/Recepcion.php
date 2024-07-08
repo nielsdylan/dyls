@@ -7,6 +7,7 @@ use App\Models\Configuraciones\Habitacion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Recepcion extends Model
@@ -25,5 +26,9 @@ class Recepcion extends Model
     public function habitaciones(): BelongsTo
     {
         return $this->belongsTo(Habitacion::class,'habitacion_id');
+    }
+    public function detalle(): HasOne
+    {
+        return $this->hasOne(RecepcionDetalle::class);
     }
 }

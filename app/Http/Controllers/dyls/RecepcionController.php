@@ -56,7 +56,7 @@ class RecepcionController extends Controller
     }
     public function formulario($id){
         $recepcion = Recepcion::find($id);
-        $detalle = RecepcionDetalle::where('recepcion_id',$id)->first();
+        $detalle = RecepcionDetalle::where('recepcion_id',$id)->whereNotIn('estado_id',[9,8])->first();
         $clientes = Cliente::where('estado_id','!=',2)->get();
         return view('dyls.recepciones.formulario', get_defined_vars());
         // return $id;

@@ -15,7 +15,7 @@ class ReservasController extends Controller
     //
     public function calendario() {
         $tipo_documentos = TipoDocumento::where('estado_id','!=',2)->get();
-        $recepciones = Recepcion::where('estado_id',3)->get();
+        $recepciones = Recepcion::where('estado_id','!=',2)->get();
         $clientes = Cliente::where('estado_id','!=',2)->get();
         return view('dyls.reservas.calendario', get_defined_vars());
     }
@@ -23,31 +23,17 @@ class ReservasController extends Controller
 
         $verificacion = Recepcion::where('id',$request->recepcion_id)->first();
 
-        if($verificacion->estado_id !== 3){
+        if($verificacion->estado_id !== 3 && ($request->id == 0)){
             return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
         }
-
-        $persona = new Persona();
-        $persona->apellido_paterno  = $request->apellido_paterno;
-        $persona->apellido_materno  = $request->apellido_materno;
-        $persona->nro_documento     = $request->nro_documento;
-        $persona->documento_id      = $request->documento_id;
-        $persona->nombres           = $request->nombres;
-        $persona->telefono          = $request->telefono;
-        $persona->save();
-
-        $cliente = new Cliente();
-        $cliente->codigo       = 'C'.$request->nro_documento;
-        $cliente->persona_id   = $persona->id;
-        $cliente->save();
 
         $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
         $recepcion->estado_id = 4;
         $recepcion->save();
 
-        $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $request->recepcion_id]);
+        $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $recepcion->id]);
         $data->recepcion_id     = $request->recepcion_id;
-        $data->cliente_id       = $cliente->id;
+        $data->cliente_id       = $request->cliente_id;
         $data->fecha_entrada    = $request->fecha_entrada;
         $data->fecha_salida     = $request->fecha_salida;
         $data->hora_entrada     = $request->hora_entrada;
@@ -71,14 +57,16 @@ class ReservasController extends Controller
         //     borderColor: '#161D2B'
         // },
         $recepciones = Recepcion::whereIn('estado_id',[4,5])->get();
+        
         $eventos = array();
         foreach ($recepciones as $key => $value) {
+            // return $value->detalle;
             array_push($eventos,array(
                 "id"=> $value->id,
                 // "groupId"=> $value->id,
                 "title"=> $value->habitaciones->nombre . ' ' . $value->habitaciones->categoria->nombre,
-                "start"=> '2024-06-27T05:30:00.000Z',
-                "end"=> '2024-06-27T05:30:00.000Z',
+                "start"=> $value->detalle->fecha_entrada.'T'.$value->detalle->hora_entrada ,
+                "end"=> $value->detalle->fecha_salida.'T'.$value->detalle->hora_salida,
                 "color"=> $value->estados->color_exadecimal,
                 "backgroundColor"=> $value->estados->background_color,
                 "textColor"=> $value->estados->text_color,
@@ -91,5 +79,15 @@ class ReservasController extends Controller
         $recepcion = Recepcion::find($id);
         $recepcion_detalle = RecepcionDetalle::where('recepcion_id',$id)->first();
         return response()->json(["recepcion"=>$recepcion,"recepcion_detalle"=>$recepcion_detalle],200);
+    }
+    public function cancelar($id){
+        $recepcion = Recepcion::find($id);
+        $recepcion->estado_id = 3;
+        $recepcion->save();
+
+        $recepcion_detalle = RecepcionDetalle::where('recepcion_id',$recepcion->id)->first();
+        $recepcion_detalle->estado_id = 9;
+        $recepcion_detalle->save();
+        return response()->json(["titulo" => "Éxito", "mensaje" => "Se cancelo la reserva con éxito", "tipo" => "warning"],200);
     }
 }

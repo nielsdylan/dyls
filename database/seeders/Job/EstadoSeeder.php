@@ -111,5 +111,18 @@ class EstadoSeeder extends Seeder
             'created_at'        => date('Y-m-d H:i:s'),
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
+        //9
+        DB::table('estados')->insert([
+            'nombre'        => 'RESERVA ANULADA',
+            'descripcion'   => 'ES CUANDO EL CLIENTE CANCELA SU RESERVA O NO SE PRESENTO.',
+            'color'         => 'danger',
+
+            'color_exadecimal'  => '#C03221',
+            'background_color'  => '#F2D6D3',
+            'text_color'        => '#C03221',
+            'border_color'      => '#C03221',
+            'created_at'        => date('Y-m-d H:i:s'),
+            'updated_at'        => date('Y-m-d H:i:s'),
+        ]);
     }
 }

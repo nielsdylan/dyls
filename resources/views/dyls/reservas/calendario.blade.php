@@ -73,7 +73,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="nivel-titulo">Modal title</h5>
+                    <h5 class="modal-title" id="nivel-titulo">Reserva de Habitación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -83,7 +83,9 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
+                                <label for="cliente_id">Cliente</label>
                                 <div class="input-group mb-3">
+                                    
                                     <select class="form-select form-select-sm" id="cliente_id" name="cliente_id" >
                                         <option selected>Seleccione...</option>
                                         @foreach ($clientes as $value)
@@ -157,7 +159,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+                        <button type="button" data-action="cancelar-reserva" class="btn btn-danger btn-sm">Cancelar reserva</button>
                         <button type="button" class="btn btn-default btn-sm" data-bs-dismiss="modal">Cerrar</button>
+                        
 
                     </div>
                 </form>
@@ -250,12 +254,6 @@
             </div>
         </div>
     </div>
-{{--
-    <button type="button" class="btn btn-primary click-toast">Show live toast</button> --}}
-
-
-
-
 @endsection
 @section('script')
 

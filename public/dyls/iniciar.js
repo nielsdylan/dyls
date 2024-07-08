@@ -5,7 +5,7 @@ const  alertas = (titulo, mensaje, tipo) => {
         const random = Math.random();
         alerta = '';
         alerta+='<div id="alerta-'+random+'" class="alert alert-bottom alert-'+tipo+' alert-dismissible fade show mb-3" role="alert">'
-            alerta+='<span><i class="fas fa-thumbs-up"></i>dd</span>'
+            alerta+='<span><i class="fas fa-thumbs-up"></i></span>'
             alerta+='<span class="me-5"> '+mensaje+'</span>'
             alerta+='<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-button="'+random+'"></button>'
         alerta+='</div>';

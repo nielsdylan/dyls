@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('editar/{id}', [ReservasController::class, 'editar'])->name('editar');
             Route::post('guardar', [ReservasController::class, 'guardar'])->name('guardar');
             Route::get('eventos', [ReservasController::class, 'eventos'])->name('eventos');
+            Route::get('cancelar/{id}', [ReservasController::class, 'cancelar'])->name('cancelar');
         });
 
         Route::name('recepcion.')->prefix('recepcion')->group(function () {
