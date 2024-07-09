@@ -1,3 +1,6 @@
+$(document).ready(function () {
+    sidebarSelecMenu();
+});
 
 const  alertas = (titulo, mensaje, tipo) => {
 
@@ -25,3 +28,10 @@ const  alertas = (titulo, mensaje, tipo) => {
 //     console.error(error.message); // Se ejecutará en caso de pago fallido
 //     // Aquí podemos ofrecer al usuario la opción de intentar nuevamente o mostrar un mensaje de error
 // });
+
+const sidebarSelecMenu = () => {
+    let URLactual = window.location.href;
+    let sidebarLink = $('[href="'+URLactual+'"]').closest('li.nav-item').addClass('active');
+    let alink = $('[href="'+URLactual+'"]').addClass('active');
+    console.log(URLactual);
+}

@@ -693,7 +693,7 @@ $(".cart-btn").on("click" ,function() {
     });
   }, false);
 
-  
-  
+
+
   })();
 
