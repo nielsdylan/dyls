@@ -9,6 +9,8 @@ use App\Http\Controllers\dyls\configuraciones\NivelController;
 use App\Http\Controllers\dyls\configuraciones\TarifaController;
 use App\Http\Controllers\dyls\configuraciones\UsuarioController;
 use App\Http\Controllers\dyls\DashboardController;
+use App\Http\Controllers\dyls\puntoVenta\ProductoController;
+use App\Http\Controllers\dyls\puntoVenta\VentaController;
 use App\Http\Controllers\dyls\RecepcionController;
 use App\Http\Controllers\dyls\ReservasController;
 // use App\Http\Controllers\Backend\DashboardController;
@@ -110,18 +112,20 @@ Route::middleware(['auth'])->group(function () {
         });
         Route::name('punto-venta.')->prefix('punto-venta')->group(function () {
             Route::name('ventas.')->prefix('ventas')->group(function () {
-                Route::get('lista', [ClienteController::class, 'lista'])->name('lista');
-                Route::post('listar', [ClienteController::class, 'listar'])->name('listar');
-                Route::post('guardar', [ClienteController::class, 'guardar'])->name('guardar');
-                Route::get('editar/{id}', [ClienteController::class, 'editar'])->name('editar');
-                Route::put('eliminar/{id}', [ClienteController::class, 'eliminar'])->name('eliminar');
+                Route::get('lista', [VentaController::class, 'lista'])->name('lista');
+                Route::post('listar', [VentaController::class, 'listar'])->name('listar');
+                Route::post('guardar', [VentaController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [VentaController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [VentaController::class, 'eliminar'])->name('eliminar');
+
+                Route::get('formulario/{recepcion_id}', [VentaController::class, 'formulario'])->name('formulario');
             });
             Route::name('productos.')->prefix('productos')->group(function () {
-                Route::get('lista', [ClienteController::class, 'lista'])->name('lista');
-                Route::post('listar', [ClienteController::class, 'listar'])->name('listar');
-                Route::post('guardar', [ClienteController::class, 'guardar'])->name('guardar');
-                Route::get('editar/{id}', [ClienteController::class, 'editar'])->name('editar');
-                Route::put('eliminar/{id}', [ClienteController::class, 'eliminar'])->name('eliminar');
+                Route::get('lista', [ProductoController::class, 'lista'])->name('lista');
+                Route::post('listar', [ProductoController::class, 'listar'])->name('listar');
+                Route::post('guardar', [ProductoController::class, 'guardar'])->name('guardar');
+                Route::get('editar/{id}', [ProductoController::class, 'editar'])->name('editar');
+                Route::put('eliminar/{id}', [ProductoController::class, 'eliminar'])->name('eliminar');
             });
         });
     });
