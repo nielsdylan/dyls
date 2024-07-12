@@ -31,7 +31,14 @@ const  alertas = (titulo, mensaje, tipo) => {
 
 const sidebarSelecMenu = () => {
     let URLactual = window.location.href;
-    let sidebarLink = $('[href="'+URLactual+'"]').closest('li.nav-item').addClass('active');
-    let alink = $('[href="'+URLactual+'"]').addClass('active');
-    console.log(URLactual);
+    let componente_ul = $('#sidebar-menu a[href="'+URLactual+'"]').closest('ul.sub-nav');
+    let ul_id = componente_ul.attr('id');
+    if(componente_ul.length > 0){
+        componente_ul.addClass('show');
+        $('#sidebar-menu a[href="#'+ul_id+'"].nav-link').addClass('active');
+        $('#sidebar-menu a[href="'+URLactual+'"]').addClass('active');
+    }else{
+        let aLink = $('#sidebar-menu a[href="'+URLactual+'"]').addClass('active');
+    }
+
 }
