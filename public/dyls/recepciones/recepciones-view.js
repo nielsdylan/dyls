@@ -102,15 +102,67 @@ class RecepcionesView {
             e.preventDefault();
 
             let data = $(e.currentTarget).serialize();
+            let model = this.model;
+            Swal.fire({
 
-            this.model.guardar(data).then((respuesta) => {
-                console.log(respuesta);
-            }).fail((respuesta) => {
-                console.log(respuesta);
-            }).always(() => {
+                title: '¿Esta seguro de?',
+                text: '¿Estas seguro de guardar el registro?',
+                icon: 'question',
+                // iconColor:'#87adbd',
+                // showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick: false,
+
+
+                showCancelButton: true,
+                showLoaderOnConfirm: true,
+                preConfirm: async (login) => {
+                    return model.guardar(data).then((respuesta) => {
+                        return respuesta;
+                    }).fail((respuesta) => {
+                        console.log(respuesta);
+                    }).always(() => {
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: result.value.titulo,
+                        text: result.value.mensaje,
+                        icon: result.value.tipo,
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false,
+                    }).then((resultado) => {
+                        location.reload();
+                    })
+                  console.log(result);
+                }
             });
+
+
+            // model.guardar(data).then((respuesta) => {
+            //     Swal.fire({
+            //         title: respuesta.titulo,
+            //         text: respuesta.mensaje,
+            //         icon: respuesta.tipo,
+            //         showCancelButton: false,
+            //         confirmButtonColor: '#3085d6',
+            //         confirmButtonText: 'Aceptar',
+            //         allowOutsideClick: false,
+            //     }).then((resultado) => {
+            //         console.log(resultado);
+            //     })
+
+            // }).fail((respuesta) => {
+            //     console.log(respuesta);
+            // }).always(() => {
+            // });
         });
-        $('#guardar [name="adelanto"]').change(function (e) { 
+        $('#guardar [name="adelanto"]').change(function (e) {
             e.preventDefault();
             let adelanto = $(e.currentTarget).val();
             let total = $('#guardar [name="total"]').val();

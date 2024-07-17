@@ -31,4 +31,12 @@ class VentaModel {
         });
     }
 
+    obtenerPoducto = (id) => {
+        return $.ajax({
+            url: route("dyls.punto-venta.productos.editar", {id: id}),
+            type: "GET",
+            dataType: "JSON",
+            data: { _token: this.token },
+        });
+    }
 }

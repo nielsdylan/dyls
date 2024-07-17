@@ -96,109 +96,36 @@ class VentaView {
         $('[name="producto_id"]').change((e) => {
             e.preventDefault();
             let id = $(e.currentTarget).val();
-            console.log(id);
-        });
-        $('#nuevo').click((e) => {
-            e.preventDefault();
-            console.log('click');
-            $('#guardar-modal')[0].reset();
-            $('#modal-crear [name="jerarquia_id"] option').removeAttr('selected');
-            $('#modal-crear').modal('show');
-            $('#modal-crear').find('[name="id"]').val(0);
-            $('#modal-crear').find('#nivel-titulo').text('Nuevo producto');
+            let html = '';
+            let tr_select = $('#poductos-ventas').find('tbody').find('tr[key="'+id+'"]');
 
-        });
-        $('#guardar-modal').submit((e) => {
-            e.preventDefault();
-
-            let data = $(e.currentTarget).serialize();
-
-            this.model.guardar(data).then((respuesta) => {
-                $('#modal-crear').modal('hide');
+            if(tr_select.length==0){
+                this.model.obtenerPoducto(id).then((respuesta) => {
+                    console.log(respuesta);
+                    html ='<tr key="'+respuesta.id+'">'+
+                        '<td>'+
+                            '<h6 class="mb-0">'+respuesta.codigo+'</h6>'+
+                            '<p class="mb-0">'+respuesta.descripcion+'</p>'+
+                        '</td>'+
+                        '<td> <input type="number" class="form-control form-control-sm text-center" value="1"></td>'+
+                        '<td>'+respuesta.precio+'</td>'+
+                        '<td class="text-end">'+respuesta.precio+'</td>'+
+                        '<td>zx</td>'+
+                    '</tr>';
+                    $('#poductos-ventas').find('tbody').append(html);
+                }).fail((respuesta) => {
+                    console.log(respuesta);
+                }).always(() => {
+                });
+            }else{
                 Swal.fire({
-                    title: respuesta.titulo,
-                    text: respuesta.mensaje,
-                    icon: respuesta.tipo,
-                    showCancelButton: false,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Aceptar',
-                    allowOutsideClick: false,
-                }).then((resultado) => {
-                    if (resultado.isConfirmed) {
-                        $('#tabla-data').DataTable().ajax.reload();
-                    }
-                })
-            }).fail((respuesta) => {
-                console.log(respuesta);
-
-            }).always(() => {
-            });
+                    title: "¡Alerta!",
+                    text: "El producto ya se encuentra seleccionado.",
+                    icon: "warning"
+                });
+            }
         });
 
-
-        $('#tabla-data').on("click", 'a.editar', (e) => {
-            e.preventDefault();
-            $("#guardar-modal")[0].reset();
-            $('#modal-crear [name="jerarquia_id"] option').removeAttr('selected');
-            let id = $(e.currentTarget).attr('data-id');
-            this.model.editar(id).then((respuesta) => {
-                $('#modal-crear').find('#nivel-titulo').text('Editar Producto');
-                $('#modal-crear').find('[name="id"]').val(respuesta.id);
-                $('#modal-crear [name="jerarquia_id"] [value="'+respuesta.jerarquia_id+'"]').attr('selected','true');
-                $('#modal-crear').find('[name="descripcion"]').val(respuesta.descripcion);
-                $('#modal-crear').find('[name="stock"]').val(respuesta.stock);
-                $('#modal-crear').find('[name="precio"]').val(respuesta.precio);
-                $('#modal-crear').modal('show');
-
-                $('#tabla-data').DataTable().ajax.reload();
-            }).fail((respuesta) => {
-                console.log(respuesta);
-            }).always(() => {
-            });
-        });
-
-
-        $('#tabla-data').on("click", 'a.eliminar', (e) => {
-            e.preventDefault();
-            let id = $(e.currentTarget).attr('data-id');
-            let modelo = this.model;
-            Swal.fire({
-                title: 'Eliminar',
-                text: "¿Está seguro de eliminar?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'No, cancelar',
-                showLoaderOnConfirm: true,
-                preConfirm: (login) => {
-                    return modelo.eliminar(id).then((respuesta) => {
-                        return respuesta;
-                    }).fail((respuesta) => {
-                        // return respuesta;
-                    }).always(() => {
-                    });
-                },
-              }).then((result) => {
-
-                if (result.isConfirmed) {
-
-                    Swal.fire({
-                        title: result.value.titulo,
-                        text: result.value.mensaje,
-                        icon: result.value.tipo,
-                        showCancelButton: false,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false,
-                    }).then((resultado) => {
-                        if (resultado.isConfirmed) {
-                            $('#tabla-data').DataTable().ajax.reload();
-                        }
-                    })
-                }
-
-            })
-        });
     }
 }
 

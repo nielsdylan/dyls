@@ -60,50 +60,42 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nombre">Nombre :</label>
-                                <p>{{$recepcion->habitaciones->nombre}}</p>
+                                <label for="nombre">Nombre :</label><strong> {{$recepcion->habitaciones->nombre}}</strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="tarifa">Tarifa :</label>
-                                <p>{{$recepcion->habitaciones->tarifa->nombre}}</p>
+                                <label for="tarifa">Tarifa :</label> <strong>{{$recepcion->habitaciones->tarifa->nombre}}</strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="categoria">Categoría :</label>
-                                <p>{{$recepcion->habitaciones->categoria->nombre}}</p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="precio">Precio :</label>
-                                <p>{{$recepcion->habitaciones->precio}}</p>
+                                <label for="categoria">Categoría :</label> <strong>{{$recepcion->habitaciones->categoria->nombre}}</strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="estado">Estados :</label>
-                                <p>{{$recepcion->estados->nombre}}</p>
+                                <label for="precio">Precio :</label> <strong>{{$recepcion->habitaciones->precio}}</strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="detalle">Detalle :</label>
-                                <p>{{$recepcion->habitaciones->descripcion}}</p>
+                                <label for="estado">Estados :</label> <strong>{{$recepcion->estados->nombre}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="detalle">Detalle :</label> <p>{{$recepcion->habitaciones->descripcion}}</p>
                             </div>
                         </div>
                     </div>
@@ -123,10 +115,10 @@
                         <input type="hidden" name="id" value="0">
                         <input type="hidden" name="recepcion_id" value="{{$recepcion->id}}">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="cliente_id">Cliente</label>
-                                    <select id="cliente_id" class="form-select  mb-3 shadow-none" name="cliente_id" required>
+                                    <select id="cliente_id" class="form-select  mb-3 shadow-none form-select-sm" name="cliente_id" required>
                                         <option value="">Seleccione...</option>
                                         @foreach ($clientes as $value)
                                         <option value="{{$value->id}}"  {{ ($detalle?($detalle->cliente_id==$value->id?'selected':''):'') }}
@@ -135,32 +127,35 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="fecha_entrada">Fecha de entrada</label>
                                     <input type="hidden" name="fecha_entrada" value="{{ ($detalle?$detalle->fecha_entrada:date("Y-m-d")) }}">
-                                    <input id="fecha_entrada" class="form-control " type="date" name="fecha_entrada" value="{{ ($detalle?$detalle->fecha_entrada:date("Y-m-d")) }}" disabled>
+                                    <input id="fecha_entrada" class="form-control form-control-sm" type="date" name="fecha_entrada" value="{{ ($detalle?$detalle->fecha_entrada:date("Y-m-d")) }}" disabled>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="fecha_salida">Fecha de salida</label>
-                                    <input id="fecha_salida" class="form-control" type="date" name="fecha_salida" value="{{ ($detalle?$detalle->fecha_salida:date("Y-m-d",strtotime(date("Y-m-d")."+ 1 days"))) }}" required>
+                                    <input id="fecha_salida" class="form-control form-control-sm" type="date" name="fecha_salida" value="{{ ($detalle?$detalle->fecha_salida:date("Y-m-d",strtotime(date("Y-m-d")."+ 1 days"))) }}" required>
 
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="hora_entrada">Hora de entrada</label>
-                                    <input id="hora_entrada" class="form-control" type="time" name="hora_entrada" value="{{ ($detalle?$detalle->hora_entrada:date("H:i")) }}" disabled>
+                                    <input id="hora_entrada" class="form-control form-control-sm" type="time" name="hora_entrada" value="{{ ($detalle?$detalle->hora_entrada:date("H:i")) }}" disabled>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="hora_salida">Hora de salida</label>
-                                    <input id="hora_salida" class="form-control" type="time" name="hora_salida" value="{{ ($detalle?$detalle->hora_salida:'12:00') }}" required>
+                                    <input id="hora_salida" class="form-control form-control-sm" type="time" name="hora_salida" value="{{ ($detalle?$detalle->hora_salida:'12:00') }}" required>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +164,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="adelanto">Adelanto</label>
-                                    <input id="adelanto" class="form-control" type="text" name="adelanto" value="{{ ($detalle?$detalle->adelanto:'') }}" placeholder="0.00">
+                                    <input id="adelanto" class="form-control form-control-sm" type="text" name="adelanto" value="{{ ($detalle?$detalle->adelanto:'') }}" placeholder="0.00">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -178,7 +173,19 @@
                                     {{-- <input type="hidden" name="saldo_total" value="{{ ($detalle?$detalle->saldo:$recepcion->habitaciones->precio) }}"> --}}
                                     <input type="hidden" name="saldo" value="{{ ($detalle?$detalle->saldo:$recepcion->habitaciones->precio) }}">
                                     <input type="hidden" name="total" value="{{ ($detalle?$detalle->total:$recepcion->habitaciones->precio) }}">
-                                    <input id="saldo" class="form-control" type="text" placeholder="0.00" value="{{ ($detalle?$detalle->saldo:$recepcion->habitaciones->precio)}}" disabled>
+                                    <input id="saldo" class="form-control form-control-sm" type="text" placeholder="0.00" value="{{ ($detalle?$detalle->saldo:$recepcion->habitaciones->precio)}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="estado_id">Estado</label>
+                                    <select id="clienteestado_id_id" class="form-select  mb-3 shadow-none form-select-sm" name="estado_id" required>
+                                        <option value="">Seleccione...</option>
+                                        @foreach ($estados as $value)
+                                        <option value="{{$value->id}}"  {{ ($detalle?($detalle->estado_id==$value->id?'selected':''):($recepcion->estado_id==$value->id?'selected':'')) }}
+                                            >  {{$value->nombre }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

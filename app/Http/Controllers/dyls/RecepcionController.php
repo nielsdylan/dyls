@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dyls;
 
 use App\Http\Controllers\Controller;
 use App\Models\Configuraciones\Cliente;
+use App\Models\Configuraciones\Estado;
 use App\Models\Recepcion;
 use App\Models\RecepcionDetalle;
 use Exception;
@@ -58,19 +59,26 @@ class RecepcionController extends Controller
         $recepcion = Recepcion::find($id);
         $detalle = RecepcionDetalle::where('recepcion_id',$id)->whereNotIn('estado_id',[9,8])->first();
         $clientes = Cliente::where('estado_id','!=',2)->get();
+        $estados = Estado::whereNotIn('id',[1,2])->get();
+        // return [$recepcion,$detalle];
         return view('dyls.recepciones.formulario', get_defined_vars());
         // return $id;
     }
     public function guardar(Request $request)
     {
-        // return $request;exit;
+
         // try {
             $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
-            $recepcion->estado_id = 5;
+            $recepcion->estado_id = ((int)$request->estado_id==3?5:$request->estado_id);
             $recepcion->save();
 
-            $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $request->recepcion_id]);
-            $data->recepcion_id     = $request->recepcion_id;
+            // $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $request->recepcion_id]);
+            $data = RecepcionDetalle::where('recepcion_id',$request->recepcion_id)->whereNotIn('estado_id',[9,8])->first();
+            // return $request;exit;
+            if(!$data){
+                $data = new RecepcionDetalle();
+            }
+            $data->recepcion_id     = (int)$request->recepcion_id;
             $data->cliente_id       = $request->cliente_id;
             $data->fecha_entrada    = $request->fecha_entrada;
             $data->fecha_salida     = $request->fecha_salida;
@@ -80,9 +88,28 @@ class RecepcionController extends Controller
             $data->saldo            = $request->saldo;
             $data->total            = $recepcion->habitaciones->precio;
             $data->descripcion      = $request->descripcion;
-            $data->estado_id        = 5;
+            $data->estado_id        = ((int)$request->estado_id==3?5:$request->estado_id);
             $data->save();
 
+            if(in_array($request->estado_id, [9,8])){
+                $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
+                $recepcion->estado_id = 3;
+                $recepcion->save();
+
+                // $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $request->recepcion_id]);
+                // $data->recepcion_id     = $request->recepcion_id;
+                // $data->cliente_id       = $request->cliente_id;
+                // $data->fecha_entrada    = $request->fecha_entrada;
+                // $data->fecha_salida     = $request->fecha_salida;
+                // $data->hora_entrada     = date("H:i");
+                // $data->hora_salida      = $request->hora_salida;
+                // $data->adelanto         = $request->adelanto;
+                // $data->saldo            = $request->saldo;
+                // $data->total            = $recepcion->habitaciones->precio;
+                // $data->descripcion      = $request->descripcion;
+                // $data->estado_id        = ((int)$request->estado_id==3?5:$request->estado_id);
+                // $data->save();
+            }
 
             // if ((int) $request->id == 0) {
             //     $data->fecha_registro       = date('Y-m-d H:i:s');

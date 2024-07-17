@@ -1,5 +1,5 @@
 class CalendarioView {
-     
+
     constructor(model) {
         this.model = model;
         this.calendario_evento;
@@ -74,7 +74,20 @@ class CalendarioView {
             let data = $(e.currentTarget).serialize();
             let model = this;
             this.model.guardar(data).then((respuesta) => {
-                alertas(respuesta.titulo, respuesta.mensaje, respuesta.tipo);
+                Swal.fire({
+                    title: respuesta.titulo,
+                    text: respuesta.mensaje,
+                    icon: respuesta.tipo,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false,
+                }).then((resultado) => {
+                    // if (resultado.isConfirmed) {
+                    //     $('#tabla-data').DataTable().ajax.reload();
+                    // }
+                })
+                // alertas(respuesta.titulo, respuesta.mensaje, respuesta.tipo);
                 $('#calendar1').html('');
                 this.calendario();
                 // $('#calendar1')[0].fullCalendar('refetchEvents');
@@ -123,7 +136,20 @@ class CalendarioView {
             $(e.currentTarget).find('[type="submit"]').attr('disabled','true');
             this.model.guardarCliente(data).then((respuesta) => {
                 // console.log(respuesta);
-                alertas(respuesta.titulo, respuesta.mensaje, respuesta.tipo, 5);
+                Swal.fire({
+                    title: respuesta.titulo,
+                    text: respuesta.mensaje,
+                    icon: respuesta.tipo,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false,
+                }).then((resultado) => {
+                    if (resultado.isConfirmed) {
+                        $('#tabla-data').DataTable().ajax.reload();
+                    }
+                })
+                // alertas(respuesta.titulo, respuesta.mensaje, respuesta.tipo, 5);
                 $('#formulario-cliente-modal').modal('hide');
                 $(e.currentTarget).find('[type="submit"]').removeAttr('disabled');
                 model.listarCombo().then((respuesta) => {

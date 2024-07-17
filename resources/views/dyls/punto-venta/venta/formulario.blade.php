@@ -80,19 +80,24 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="custom-table-effect table-responsive border rounded">
-                                <table id="tabla-data" class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Descripción</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
-                                            <th>Total</th>
+                                <div class="table-responsive-lg">
+                                    <table id="poductos-ventas" class="table billing">
+                                       <thead>
+                                          <tr>
+
+                                            <th scope="col">Descripción</th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Precio</th>
+                                            <th class="text-end" scope="col">Sub-Total</th>
                                             <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+
+                                       </tbody>
+                                    </table>
+                                 </div>
                             </div>
                         </div>
                     </div>
