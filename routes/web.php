@@ -113,12 +113,14 @@ Route::middleware(['auth'])->group(function () {
         Route::name('punto-venta.')->prefix('punto-venta')->group(function () {
             Route::name('ventas.')->prefix('ventas')->group(function () {
                 Route::get('lista', [VentaController::class, 'lista'])->name('lista');
-                Route::post('listar', [VentaController::class, 'listar'])->name('listar');
+                // Route::post('listar', [VentaController::class, 'listar'])->name('listar');
                 Route::post('guardar', [VentaController::class, 'guardar'])->name('guardar');
                 Route::get('editar/{id}', [VentaController::class, 'editar'])->name('editar');
                 Route::put('eliminar/{id}', [VentaController::class, 'eliminar'])->name('eliminar');
 
                 Route::get('formulario/{recepcion_id}', [VentaController::class, 'formulario'])->name('formulario');
+                Route::post('recepcion-productos-ventas', [VentaController::class, 'recepcionProductosVentas'])->name('recepcion-productos-ventas');
+                Route::get('listar-recepcion-productos-ventas/{recepcion_id}/{recepcion_detalle_id}', [VentaController::class, 'listarRecepcionProductosVentas'])->name('listar-recepcion-productos-ventas');
             });
             Route::name('productos.')->prefix('productos')->group(function () {
                 Route::get('lista', [ProductoController::class, 'lista'])->name('lista');

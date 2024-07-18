@@ -57,7 +57,7 @@ class RecepcionController extends Controller
     }
     public function formulario($id){
         $recepcion = Recepcion::find($id);
-        $detalle = RecepcionDetalle::where('recepcion_id',$id)->whereNotIn('estado_id',[9,8])->first();
+        $detalle = RecepcionDetalle::where('recepcion_id',$id)->whereNotIn('estado_id',[9,8,2])->first();
         $clientes = Cliente::where('estado_id','!=',2)->get();
         $estados = Estado::whereNotIn('id',[1,2])->get();
         // return [$recepcion,$detalle];
@@ -73,7 +73,7 @@ class RecepcionController extends Controller
             $recepcion->save();
 
             // $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $request->recepcion_id]);
-            $data = RecepcionDetalle::where('recepcion_id',$request->recepcion_id)->whereNotIn('estado_id',[9,8])->first();
+            $data = RecepcionDetalle::where('recepcion_id',$request->recepcion_id)->whereNotIn('estado_id',[9,8,2])->first();
             // return $request;exit;
             if(!$data){
                 $data = new RecepcionDetalle();
@@ -91,7 +91,7 @@ class RecepcionController extends Controller
             $data->estado_id        = ((int)$request->estado_id==3?5:$request->estado_id);
             $data->save();
 
-            if(in_array($request->estado_id, [9,8])){
+            if(in_array($request->estado_id, [9,8,2])){
                 $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
                 $recepcion->estado_id = 3;
                 $recepcion->save();

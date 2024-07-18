@@ -7,88 +7,30 @@ class VentaView {
     /**
      * Listar mediante DataTables
      */
-    listar = () => {
-        const $tabla = $('#tabla-data').DataTable({
-            destroy: true,
-            // dom: 'Bfrtip',
-            autoWidth: false,
-            responsive: true,
-            pageLength: 10,
-            language: idioma,
-            serverSide: true,
-            processing: true,
-            // buttons: ['copy', 'excel', 'pdf', 'colvis'],
-            // pagingType: 'full_numbers',
-            initComplete: function (settings, json) {
-                // const $filter = $('#tabla-data_filter');
-                // const $input = $filter.find('input');
-                // $filter.append('<button id="btnBuscar" class="btn btn-default btn-sm" type="button" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;"><i class="fa fa-search"></i></button>');
-                // $input.addClass('form-control-sm');
-                // $input.attr('style','border-bottom-right-radius: 0px;border-top-right-radius: 0px;padding-top: 3px;');
+    listarProductosVentas = () => {
+        let recepcion_id = $('#guardar-venta').find('[name="recepcion_id"]').val();
+        let recepcion_detalle_id = $('#guardar-venta').find('[name="recepcion_detalle_id"]').val();
+        let html = '';
+        this.model.listarRecepcionProductosVentas(recepcion_id, recepcion_detalle_id).then((respuesta) => {
+            $.each(respuesta.productos, function (index, element) {
+                html +='<tr key="'+element.id+'">'+
+                '<td data-section="descripcion">'+
+                    '<h6 class="mb-0">'+element.producto.codigo+'</h6>'+
+                    '<p class="mb-0">'+element.producto.descripcion+'</p>'+
+                '</td>'+
+                '<td data-section="cantidad"> <input type="number" class="form-control form-control-sm text-center cantidad-producto" value="'+element.cantidad+'"></td>'+
+                '<td data-section="precio"><span data-seleccion="precio">'+(element.precio).toFixed(2)+'</span></td>'+
+                '<td data-section="sub-total" class="text-end"><span data-seleccion="sub-total">'+(element.cantidad * element.precio).toFixed(2)+'</span></td>'+
+                '<td data-section="accion">zx</td>'+
+            '</tr>';
+            });
 
-                // $input.off();
-                // $input.on('keyup', (e) => {
-                //     if (e.key == 'Enter') {
-                //         $('#btnBuscar').trigger('click');
-                //     }
-                // });
-                // $('#btnBuscar').on('click', (e) => {
-                //     $tabla.search($input.val()).draw();
-                // });
-                // $('#tabla-data_length label').addClass('select2-sm');
-                // //______Select2
-                // $('[name="tabla-data_length"]').select2({
-                //     minimumResultsForSearch: Infinity
-                // });
-                // const $paginate = $('#tabla-data_paginate');
-                // $paginate.find('ul.pagination').addClass('pagination-sm');
-
-            },
-            drawCallback: function (settings) {
-                $('#tabla-data_filter input').prop('disabled', false);
-                $('#btnBuscar').html('<i class="fa fa-search"></i>').prop('disabled', false);
-                $('#tabla-data_filter input').trigger('focus');
-                const $paginate = $('#tabla-data_paginate');
-                $paginate.find('ul.pagination').addClass('pagination-sm');
-
-            },
-            order: [[0, 'desc']],
-            ajax: {
-                url: route('dyls.punto-venta.venta.listar'),
-                method: 'POST',
-                // headers: {'X-CSRF-TOKEN': token},
-                dataType: "JSON",
-                data: {_token:token},
-                // data: JSON.parse(localStorage.getItem('filtros'))
-                // data: filtros
-            },
-            columns: [
-                {data: 'id', className: 'text-center'},
-                {data: 'codigo', className: 'text-center'},
-                {data: 'descripcion', className: 'text-left'},
-                {data: 'stock', className: 'text-center'},
-                {data: 'precio', className: 'text-center'},
-                {data: 'jerarquia', className: 'text-center'},
-                {data: 'estado_span', className: 'text-center'},
-                {data: 'accion', orderable: false, searchable: false, className: 'text-center'}
-            ]
+            $('#poductos-ventas').find('tbody').append(html);
+            this.sumarCostos();
+        }).fail((respuesta) => {
+            console.log(respuesta);
+        }).always(() => {
         });
-        $tabla.on('search.dt', function() {
-            $('#tabla-data_filter input').attr('disabled', true);
-            $('#btnBuscar').html('<i class="fa fa-clock" aria-hidden="true"></i>').prop('disabled', true);
-        });
-        $tabla.on('init.dt', function(e, settings, processing) {
-            // $('#tabla-data_length label').addClass('select2-sm');
-            // $(e.currentTarget).LoadingOverlay('show', { imageAutoResize: true, progress: true, imageColor: '#3c8dbc' });
-        });
-        $tabla.on('processing.dt', function(e, settings, processing) {
-            if (processing) {
-                // $(e.currentTarget).LoadingOverlay('show', { imageAutoResize: true, progress: true, imageColor: '#3c8dbc' });
-            } else {
-                // $(e.currentTarget).LoadingOverlay("hide", true);
-            }
-        });
-        // $tabla.buttons().container().appendTo('#tabla-data_wrapper .col-md-6:eq(0)');
     }
 
     eventos = () => {
@@ -98,34 +40,84 @@ class VentaView {
             let id = $(e.currentTarget).val();
             let html = '';
             let tr_select = $('#poductos-ventas').find('tbody').find('tr[key="'+id+'"]');
+            let data = $('#guardar-venta').serialize();
+            // if(tr_select.length==0){
+                this.model.recepcionProductosVentas(data).then((respuesta) => {
+                    if(respuesta.tipo===1){
 
-            if(tr_select.length==0){
-                this.model.obtenerPoducto(id).then((respuesta) => {
-                    console.log(respuesta);
-                    html ='<tr key="'+respuesta.id+'">'+
-                        '<td>'+
-                            '<h6 class="mb-0">'+respuesta.codigo+'</h6>'+
-                            '<p class="mb-0">'+respuesta.descripcion+'</p>'+
-                        '</td>'+
-                        '<td> <input type="number" class="form-control form-control-sm text-center" value="1"></td>'+
-                        '<td>'+respuesta.precio+'</td>'+
-                        '<td class="text-end">'+respuesta.precio+'</td>'+
-                        '<td>zx</td>'+
-                    '</tr>';
-                    $('#poductos-ventas').find('tbody').append(html);
+                        html ='<tr key="'+respuesta.producto.id+'">'+
+                            '<td data-section="descripcion">'+
+                                '<h6 class="mb-0">'+respuesta.producto.producto.codigo+'</h6>'+
+                                '<p class="mb-0">'+respuesta.producto.producto.descripcion+'</p>'+
+                            '</td>'+
+                            '<td data-section="cantidad"> <input type="number" class="form-control form-control-sm text-center cantidad-producto" name="cantidad[]" value="'+respuesta.producto.cantidad+'"></td>'+
+                            '<td data-section="precio"><span data-seleccion="precio">'+(respuesta.producto.precio).toFixed(2)+'</span></td>'+
+                            '<td data-section="sub-total" class="text-end"><span data-seleccion="sub-total">'+(respuesta.producto.precio).toFixed(2)+'</span></td>'+
+                            '<td data-section="accion">zx</td>'+
+                        '</tr>';
+                        $('#poductos-ventas').find('tbody').append(html);
+                        this.sumarCostos();
+                    }else{
+
+                        Swal.fire({
+                            title: "¡Alerta!",
+                            text: "El producto ya se encuentra seleccionado.",
+                            icon: "warning"
+                        });
+                    }
                 }).fail((respuesta) => {
                     console.log(respuesta);
                 }).always(() => {
                 });
-            }else{
-                Swal.fire({
-                    title: "¡Alerta!",
-                    text: "El producto ya se encuentra seleccionado.",
-                    icon: "warning"
-                });
-            }
+            // }else{
+            // }
         });
 
+        $('#poductos-ventas').on("change", 'input.cantidad-producto', (e) => {
+            e.preventDefault();
+            let cantidad = $(e.currentTarget).val();
+            let precio = $(e.currentTarget).closest('tr').find('td[data-section="precio"]').find('[data-seleccion="precio"]').text();
+            let key = $(e.currentTarget).closest('tr').attr('key');
+            let sub_total = parseFloat(precio) *  parseFloat(cantidad);
+
+            $('#poductos-ventas').find('tr[key="'+key+'"]').find('td[data-section="sub-total"]').find('span[data-seleccion="sub-total"]').text(sub_total.toFixed(2));
+
+            this.model.guardar(key,cantidad).then((respuesta) => {
+                if(respuesta.tipo == 200){
+                    this.sumarCostos();
+                }else{
+                    Swal.fire({
+                        title: respuesta.titulo,
+                        text: respuesta.texto,
+                        icon: respuesta.icono
+                    });
+                    console.log(respuesta);
+                }
+
+            }).fail((respuesta) => {
+                console.log(respuesta);
+            }).always(() => {
+            });
+        });
+        // function sumarCostos() {
+
+        // }
+    }
+
+    sumarCostos = () => {
+        let tabla = $('#poductos-ventas tbody tr td[data-section="sub-total"]');
+        let total = 0;
+        let descuento = parseFloat($('#poductos-ventas').find('tfoot').find('tr td[data-section="descuento-valor"]').text());
+        let pagar = 0;
+        $.each(tabla, function (index, element) {
+            let sub_total = parseFloat(element.children[0].innerText);
+            total = total + sub_total;
+
+        });
+        $('#poductos-ventas').find('tfoot').find('tr td[data-section="total-valor"]').text(total.toFixed(2));
+
+        pagar = total - descuento;
+        $('#poductos-ventas').find('tfoot').find('tr td[data-section="pagar-valor"]').text(pagar.toFixed(2));
     }
 }
 

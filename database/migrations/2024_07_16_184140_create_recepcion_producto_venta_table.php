@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('recepcion_producto_venta', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->nullable();
-
+            $table->float('cantidad', 8, 2)->nullable();
+            $table->float('precio', 8, 2)->nullable();
+            $table->integer('producto_id')->nullable();
+            $table->integer('recepcion_id')->nullable();
+            $table->integer('recepcion_detalle_id')->nullable();
             $table->integer('estado_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

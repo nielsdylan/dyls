@@ -64,43 +64,62 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Seleccione el producto para su venta</label>
-                                <select class="select2-basic-single js-states form-select form-control" name="producto_id" style="width: 100%;">
-                                    <option value="">Seleccione...</option>
-                                    @foreach ($productos as $value)
-                                    <option value="{{$value->id}}">{{$value->descripcion}}</option>
-                                    @endforeach
-                                </select>
+                    <form action="" id="guardar-venta">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Seleccione el producto para su venta</label>
+                                    <select class="select2-basic-single js-states form-select form-control" name="producto_id" style="width: 100%;">
+                                        <option value="">Seleccione...</option>
+                                        @foreach ($productos as $value)
+                                        <option value="{{$value->id}}">{{$value->descripcion}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="custom-table-effect table-responsive border rounded">
-                                <div class="table-responsive-lg">
-                                    <table id="poductos-ventas" class="table billing">
-                                       <thead>
-                                          <tr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="hidden" name="recepcion_id" value="{{$recepcion->id}}">
+                                <input type="hidden" name="recepcion_detalle_id" value="{{$detalle->id}}">
+                                <div class="custom-table-effect table-responsive border rounded">
+                                    <div class="table-responsive-lg">
+                                        <table id="poductos-ventas" class="table billing">
+                                            <thead>
+                                                <tr>
 
-                                            <th scope="col">Descripción</th>
-                                            <th scope="col">Cantidad</th>
-                                            <th scope="col">Precio</th>
-                                            <th class="text-end" scope="col">Sub-Total</th>
-                                            <th>Acciones</th>
+                                                    <th scope="col">Descripción</th>
+                                                    <th scope="col">Cantidad</th>
+                                                    <th scope="col">Precio</th>
+                                                    <th class="text-end" scope="col">Sub-Total</th>
+                                                    <th>-</th>
 
-                                          </tr>
-                                       </thead>
-                                       <tbody>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                       </tbody>
-                                    </table>
-                                 </div>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td data-section="total-text" colspan="4" class="text-end">Total:</td>
+                                                    <td data-section="total-valor"><span data-section="total-valor">0.00</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-section="descuento-text" colspan="4" class="text-end">Descuento:</td>
+                                                    <td data-section="descuento-valor"><span data-section="descuento-valor">2.00</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-section="pagar-text" colspan="4" class="text-start">Monto a pagar:</td>
+                                                    <td data-section="pagar-valor"><span data-section="descuento-valor">2.00</span></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -113,7 +132,7 @@
     <script src="{{ asset('dyls/punto-venta/venta/venta-view.js') }}"></script>
     <script>
         const view = new VentaView(new VentaModel(token));
-        // view.listar();
+        view.listarProductosVentas();
         view.eventos();
     </script>
 @endsection

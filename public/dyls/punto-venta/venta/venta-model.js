@@ -4,39 +4,59 @@ class VentaModel {
         this.token = token;
     }
 
-    guardar = (data) => {
+    // guardar = (data) => {
+    //     return $.ajax({
+    //         url: route("dyls.punto-venta.venta.guardar"),
+    //         type: "POST",
+    //         dataType: "JSON",
+    //         // processData: false,
+    //         // contentType: false,
+    //         data: data,
+    //     });
+    // }
+    // editar = (id) => {
+    //     return $.ajax({
+    //         url: route("dyls.punto-venta.venta.editar", {id: id}),
+    //         type: "GET",
+    //         dataType: "JSON",
+    //         data: { _token: this.token },
+    //     });
+    // }
+    // eliminar = (id) => {
+    //     return $.ajax({
+    //         url: route("dyls.punto-venta.venta.eliminar", {id: id}),
+    //         type: "PUT",
+    //         dataType: "JSON",
+    //         data: { _token: this.token },
+    //     });
+    // }
+
+    recepcionProductosVentas = (data) => {
         return $.ajax({
-            url: route("dyls.punto-venta.venta.guardar"),
+            url: route("dyls.punto-venta.ventas.recepcion-productos-ventas"),
             type: "POST",
             dataType: "JSON",
-            // processData: false,
-            // contentType: false,
             data: data,
         });
     }
-    editar = (id) => {
+    listarRecepcionProductosVentas = (recepcion_id, recepcion_detalle_id) => {
         return $.ajax({
-            url: route("dyls.punto-venta.venta.editar", {id: id}),
+            url: route("dyls.punto-venta.ventas.listar-recepcion-productos-ventas", {recepcion_id: recepcion_id, recepcion_detalle_id:recepcion_detalle_id}),
             type: "GET",
             dataType: "JSON",
             data: { _token: this.token },
         });
     }
-    eliminar = (id) => {
+    guardar = (id, cantidad) => {
         return $.ajax({
-            url: route("dyls.punto-venta.venta.eliminar", {id: id}),
-            type: "PUT",
+            url: route("dyls.punto-venta.ventas.guardar"),
+            type: "POST",
             dataType: "JSON",
-            data: { _token: this.token },
-        });
-    }
-
-    obtenerPoducto = (id) => {
-        return $.ajax({
-            url: route("dyls.punto-venta.productos.editar", {id: id}),
-            type: "GET",
-            dataType: "JSON",
-            data: { _token: this.token },
+            data: {
+                _token: this.token,
+                id:id,
+                cantidad:cantidad
+            },
         });
     }
 }
