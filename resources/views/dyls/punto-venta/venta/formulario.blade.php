@@ -107,11 +107,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td data-section="descuento-text" colspan="4" class="text-end">Descuento:</td>
-                                                    <td data-section="descuento-valor"><span data-section="descuento-valor">2.00</span></td>
+                                                    <td data-section="descuento-valor"><span data-section="descuento-valor">0.00</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td data-section="pagar-text" colspan="4" class="text-start">Monto a pagar:</td>
-                                                    <td data-section="pagar-valor"><span data-section="descuento-valor">2.00</span></td>
+                                                    <td data-section="pagar-valor"><span data-section="descuento-valor">0.00</span></td>
                                                 </tr>
                                             </tfoot>
                                         </table>

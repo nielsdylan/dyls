@@ -26,6 +26,7 @@ class CalendarioView {
                 $('#formulario-modal').modal('show');
                 $("#guardar-modal").find('[name="cliente_id"] option').removeAttr('selected');
                 $("#guardar-modal").find('[name="recepcion_id"] option').removeAttr('selected');
+                $("#guardar-modal").find('[name="estado_id"] option').removeAttr('selected');
                 $("#guardar-modal").find('[name="saldo"]').val(0);
                 $("#guardar-modal").find('[name="total"]').val(0);
                 $("#guardar-modal").find('[name="id"]').val(0);
@@ -33,14 +34,21 @@ class CalendarioView {
 
                 $('#formulario-modal').find('[name="fecha_entrada"]').val(info.dateStr);
                 $('#formulario-modal').find('[name="fecha_salida"]').val(info.dateStr);
-
+                $("#guardar-modal").find('[name="estado_id"] option[value="4"]').attr('selected','true');
                 $('[data-action="cancelar-reserva"]').addClass('d-none');
             },
             eventClick: function(info) {
                 $("#guardar-modal")[0].reset();
+                $("#guardar-modal").find('[name="cliente_id"] option').removeAttr('selected');
+                $("#guardar-modal").find('[name="recepcion_id"] option').removeAttr('selected');
+                $("#guardar-modal").find('[name="estado_id"] option').removeAttr('selected');
+                $("#guardar-modal").find('[name="saldo"]').val(0);
+                $("#guardar-modal").find('[name="total"]').val(0);
+                $("#guardar-modal").find('[name="id"]').val(0);
                 model.editar(info.event.id).then((respuesta) => {
                     $("#guardar-modal").find('[name="cliente_id"] option[value="'+respuesta.recepcion_detalle.cliente_id+'"]').attr('selected','true');
                     $("#guardar-modal").find('[name="recepcion_id"] option[value="'+respuesta.recepcion_detalle.recepcion_id+'"]').attr('selected','true');
+                    $("#guardar-modal").find('[name="estado_id"] option[value="'+respuesta.recepcion_detalle.estado_id+'"]').attr('selected','true');
 
                     $("#guardar-modal").find('[name="fecha_entrada"]').val(respuesta.recepcion_detalle.fecha_entrada);
                     $("#guardar-modal").find('[name="fecha_salida"]').val(respuesta.recepcion_detalle.fecha_salida);

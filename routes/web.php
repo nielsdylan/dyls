@@ -115,7 +115,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('lista', [VentaController::class, 'lista'])->name('lista');
                 // Route::post('listar', [VentaController::class, 'listar'])->name('listar');
                 Route::post('guardar', [VentaController::class, 'guardar'])->name('guardar');
-                Route::get('editar/{id}', [VentaController::class, 'editar'])->name('editar');
+                // Route::get('editar/{id}', [VentaController::class, 'editar'])->name('editar');
                 Route::put('eliminar/{id}', [VentaController::class, 'eliminar'])->name('eliminar');
 
                 Route::get('formulario/{recepcion_id}', [VentaController::class, 'formulario'])->name('formulario');

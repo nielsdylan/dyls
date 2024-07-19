@@ -141,18 +141,29 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="adelanto">Adelanto</label>
                                     <input id="adelanto" class="form-control form-control-sm" type="text" name="adelanto" value="" placeholder="0.00">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="saldo">Saldo</label>
                                     <input type="hidden" name="saldo" value="">
                                     <input type="hidden" name="total" value="">
                                     <input id="saldo" class="form-control form-control-sm" type="text" placeholder="0.00" value="" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="estado_id">Estado</label>
+                                    <select class="form-select form-select-sm" id="estado_id" name="estado_id" >
+                                        <option selected>Seleccione...</option>
+                                        @foreach ($estados as $value)
+                                        <option value="{{$value->id}}">{{$value->nombre}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

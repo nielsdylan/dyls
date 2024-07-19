@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dyls;
 
 use App\Http\Controllers\Controller;
 use App\Models\Configuraciones\Cliente;
+use App\Models\Configuraciones\Estado;
 use App\Models\Configuraciones\Persona;
 use App\Models\Configuraciones\TipoDocumento;
 use App\Models\Recepcion;
@@ -17,6 +18,7 @@ class ReservasController extends Controller
         $tipo_documentos = TipoDocumento::where('estado_id','!=',2)->get();
         $recepciones = Recepcion::where('estado_id','!=',2)->get();
         $clientes = Cliente::where('estado_id','!=',2)->get();
+        $estados = Estado::whereNotIn('id',[1,2])->get();
         return view('dyls.reservas.calendario', get_defined_vars());
     }
     public function guardar(Request $request) {
@@ -28,10 +30,16 @@ class ReservasController extends Controller
         }
 
         $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
-        $recepcion->estado_id = 4;
+        $recepcion->estado_id = $request->estado_id;
         $recepcion->save();
 
-        $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $recepcion->id]);
+        // $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $recepcion->id]);
+        $data = RecepcionDetalle::where('recepcion_id',$request->recepcion_id)->whereNotIn('estado_id',[9,8,2])->first();
+        // return $request;exit;
+        if(!$data){
+            $data = new RecepcionDetalle();
+        }
+
         $data->recepcion_id     = $request->recepcion_id;
         $data->cliente_id       = $request->cliente_id;
         $data->fecha_entrada    = $request->fecha_entrada;
@@ -42,8 +50,15 @@ class ReservasController extends Controller
         $data->saldo            = $request->saldo;
         $data->total            = $recepcion->habitaciones->precio;
         // $data->descripcion      = $request->descripcion;
-        $data->estado_id        = 4;
+        $data->estado_id        = $request->estado_id;
         $data->save();
+
+        if(in_array($request->estado_id, [9,8,2])){
+            $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
+            $recepcion->estado_id = 3;
+            $recepcion->save();
+        }
+
         return response()->json(["titulo" => "Éxito", "mensaje" => "Se guardo con éxito", "tipo" => "success"],200);
     }
     public function eventos() {
@@ -77,7 +92,7 @@ class ReservasController extends Controller
     }
     public function editar($id){
         $recepcion = Recepcion::find($id);
-        $recepcion_detalle = RecepcionDetalle::where('recepcion_id',$id)->first();
+        $recepcion_detalle = RecepcionDetalle::where('recepcion_id',$id)->whereNotIn('estado_id',[9,8,2])->first();
         return response()->json(["recepcion"=>$recepcion,"recepcion_detalle"=>$recepcion_detalle],200);
     }
     public function cancelar($id){

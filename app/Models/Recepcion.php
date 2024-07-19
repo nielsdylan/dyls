@@ -29,6 +29,6 @@ class Recepcion extends Model
     }
     public function detalle(): HasOne
     {
-        return $this->hasOne(RecepcionDetalle::class);
+        return $this->hasOne(RecepcionDetalle::class)->whereNotIn('estado_id',[9,8,2]);
     }
 }

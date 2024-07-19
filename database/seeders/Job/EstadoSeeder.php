@@ -101,7 +101,7 @@ class EstadoSeeder extends Seeder
         ]);
         //8
         DB::table('estados')->insert([
-            'nombre'        => 'FINALIZADO',
+            'nombre'        => 'HOSPEDAJE FINALIZADO',
             'descripcion'   => 'ES CUANDO EL TIEMPO DEL ALQUILER DE LA HABITACIÓN LLEGA A SU FIN.',
             'color'         => 'info',
             'color_exadecimal'  => '#C03221',

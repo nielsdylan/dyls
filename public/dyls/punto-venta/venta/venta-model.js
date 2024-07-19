@@ -22,14 +22,14 @@ class VentaModel {
     //         data: { _token: this.token },
     //     });
     // }
-    // eliminar = (id) => {
-    //     return $.ajax({
-    //         url: route("dyls.punto-venta.venta.eliminar", {id: id}),
-    //         type: "PUT",
-    //         dataType: "JSON",
-    //         data: { _token: this.token },
-    //     });
-    // }
+    eliminar = (id) => {
+        return $.ajax({
+            url: route("dyls.punto-venta.ventas.eliminar", {id: id}),
+            type: "PUT",
+            dataType: "JSON",
+            data: { _token: this.token },
+        });
+    }
 
     recepcionProductosVentas = (data) => {
         return $.ajax({

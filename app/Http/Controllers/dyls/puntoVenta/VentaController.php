@@ -31,7 +31,7 @@ class VentaController extends Controller
     public function recepcionProductosVentas(Request $request){
         $producto = Producto::find($request->producto_id);
 
-        $venta = RecepcionProductoVenta::where('recepcion_id',$request->recepcion_id)->where('recepcion_detalle_id',$request->recepcion_detalle_id)->where('producto_id',$request->producto_id)->first();
+        $venta = RecepcionProductoVenta::where('recepcion_id',$request->recepcion_id)->where('recepcion_detalle_id',$request->recepcion_detalle_id)->where('producto_id',$request->producto_id)->where('estado_id',1)->first();
 
         if(!$venta){
             $data = new RecepcionProductoVenta();
@@ -56,7 +56,7 @@ class VentaController extends Controller
 
     }
     public function listarRecepcionProductosVentas($recepcion_id, $recepcion_detalle_id) {
-        $productos = RecepcionProductoVenta::where('recepcion_id',$recepcion_id)->where('recepcion_detalle_id',$recepcion_detalle_id)->get();
+        $productos = RecepcionProductoVenta::where('recepcion_id',$recepcion_id)->where('recepcion_detalle_id',$recepcion_detalle_id)->where('estado_id',1)->get();
         foreach ($productos as $key => $value) {
             $value->producto;
         }
@@ -65,14 +65,22 @@ class VentaController extends Controller
 
     public function guardar(Request $request) {
         try {
-            $venta = RecepcionProductoVenta::find($request->id);
+            $venta = RecepcionProductoVenta::find('id',$request->id);
             $venta->cantidad = $request->cantidad;
             $venta->save();
             return response()->json(["tipo"=>200],200);
         } catch (Exception) {
             return response()->json(["titulo"=>"Alerta","texto"=>"Comuniquese con su area de TI, ocurrio un erro al momento de guardar las cantidades.","icono"=>"warning" ,"tipo"=>401],200);
         }
-
-
+    }
+    public function eliminar($id) {
+        try {
+            $venta = RecepcionProductoVenta::find($id);
+            $venta->estado_id = 2;
+            $venta->save();
+            return response()->json(["tipo"=>200],200);
+        } catch (Exception) {
+            return response()->json(["titulo"=>"Alerta","texto"=>"Comuniquese con su area de TI, ocurrio un erro al momento de guardar las cantidades.","icono"=>"warning" ,"tipo"=>401],200);
+        }
     }
 }
