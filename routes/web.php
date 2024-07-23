@@ -121,6 +121,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('formulario/{recepcion_id}', [VentaController::class, 'formulario'])->name('formulario');
                 Route::post('recepcion-productos-ventas', [VentaController::class, 'recepcionProductosVentas'])->name('recepcion-productos-ventas');
                 Route::get('listar-recepcion-productos-ventas/{recepcion_id}/{recepcion_detalle_id}', [VentaController::class, 'listarRecepcionProductosVentas'])->name('listar-recepcion-productos-ventas');
+                Route::post('guardar-pago', [VentaController::class, 'guardarPago'])->name('guardar-pago');
             });
             Route::name('productos.')->prefix('productos')->group(function () {
                 Route::get('lista', [ProductoController::class, 'lista'])->name('lista');

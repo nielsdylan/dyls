@@ -92,6 +92,7 @@
                                                     <th scope="col">Descripción</th>
                                                     <th scope="col">Cantidad</th>
                                                     <th scope="col">Precio</th>
+                                                    <th scope="col">Pagar</th>
                                                     <th class="text-end" scope="col">Sub-Total</th>
                                                     <th>-</th>
 
@@ -102,15 +103,15 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td data-section="total-text" colspan="4" class="text-end">Total:</td>
+                                                    <td data-section="total-text" colspan="5" class="text-end">Total:</td>
                                                     <td data-section="total-valor"><span data-section="total-valor">0.00</span></td>
                                                 </tr>
-                                                <tr>
+                                                {{-- <tr>
                                                     <td data-section="descuento-text" colspan="4" class="text-end">Descuento:</td>
                                                     <td data-section="descuento-valor"><span data-section="descuento-valor">0.00</span></td>
-                                                </tr>
+                                                </tr> --}}
                                                 <tr>
-                                                    <td data-section="pagar-text" colspan="4" class="text-start">Monto a pagar:</td>
+                                                    <td data-section="pagar-text" colspan="5" class="text-start">Monto a pagar:</td>
                                                     <td data-section="pagar-valor"><span data-section="descuento-valor">0.00</span></td>
                                                 </tr>
                                             </tfoot>

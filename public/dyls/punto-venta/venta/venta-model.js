@@ -59,4 +59,16 @@ class VentaModel {
             },
         });
     }
+    guardarPago = (id, pagar_id) => {
+        return $.ajax({
+            url: route("dyls.punto-venta.ventas.guardar-pago"),
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                _token: this.token,
+                id:id,
+                pagar_id:pagar_id
+            },
+        });
+    }
 }

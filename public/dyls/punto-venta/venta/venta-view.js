@@ -20,7 +20,20 @@ class VentaView {
                 '</td>'+
                 '<td data-section="cantidad"> <input type="number" class="form-control form-control-sm text-center cantidad-producto" value="'+element.cantidad+'"></td>'+
                 '<td data-section="precio"><span data-seleccion="precio">'+(element.precio).toFixed(2)+'</span></td>'+
+                '<td data-section="pagar" >'+
+                    '<div class="form-group">'+
+                        '<div class="form-check d-block">'+
+                            '<input class="form-check-input" type="radio" name="pagar'+element.id+'" value="1" data-action="pagar" data-id="'+element.id+'" />'+
+                            '<label class="form-check-label" >Ahora</label>'+
+                        '</div>'+
+                        '<div class="form-check d-block">'+
+                            '<input class="form-check-input" type="radio" name="pagar'+element.id+'" value="2" data-action="pagar" data-id="'+element.id+'" checked/>'+
+                            '<label class="form-check-label">Despues</label>'+
+                        '</div>'+
+                    '</div>'+
+                '</td>'+
                 '<td data-section="sub-total" class="text-end"><span data-seleccion="sub-total">'+(element.cantidad * element.precio).toFixed(2)+'</span></td>'+
+                
                 '<td data-section="accion" class="text-center">'+
                     '<div class="flex align-items-center list-user-action">'+
                         '<button class="btn btn-icon btn-outline-danger mt-2" href="#" data-id="'+element.id+'" data-action="eliminar">'+
@@ -64,7 +77,20 @@ class VentaView {
                             '</td>'+
                             '<td data-section="cantidad"> <input type="number" class="form-control form-control-sm text-center cantidad-producto" name="cantidad[]" value="'+respuesta.producto.cantidad+'"></td>'+
                             '<td data-section="precio"><span data-seleccion="precio">'+(respuesta.producto.precio).toFixed(2)+'</span></td>'+
+                            '<td data-section="pagar" >'+
+                                '<div class="form-group">'+
+                                    '<div class="form-check d-block">'+
+                                        '<input class="form-check-input" type="radio" name="pagar'+respuesta.producto.id+'" value="1" data-action="pagar" data-id="'+respuesta.producto.id+'" />'+
+                                        '<label class="form-check-label" >Ahora</label>'+
+                                    '</div>'+
+                                    '<div class="form-check d-block">'+
+                                        '<input class="form-check-input" type="radio" name="pagar'+respuesta.producto.id+'" value="2" data-action="pagar" data-id="'+respuesta.producto.id+'" checked/>'+
+                                        '<label class="form-check-label">Despues</label>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</td>'+
                             '<td data-section="sub-total" class="text-end"><span data-seleccion="sub-total">'+(respuesta.producto.precio).toFixed(2)+'</span></td>'+
+                            
                             '<td data-section="accion" class="text-center">'+
                                 '<div class="flex align-items-center list-user-action">'+
                                     '<button class="btn btn-icon btn-outline-danger mt-2" href="#" data-id="'+respuesta.producto.id+'" data-action="eliminar">'+
@@ -147,12 +173,25 @@ class VentaView {
             }).always(() => {
             });
         });
+        $('#poductos-ventas').on("click", 'input[data-action="pagar"]', (e) => {
+            // e.preventDefault();
+            let id = $(e.currentTarget).attr('data-id');
+            let pago_id = $(e.currentTarget).val();
+            this.model.guardarPago(id,pago_id).then((respuesta) => {
+                
+                console.log(respuesta);
+
+            }).fail((respuesta) => {
+                console.log(respuesta);
+            }).always(() => {
+            });
+        });
     }
 
     sumarCostos = () => {
         let tabla = $('#poductos-ventas tbody tr td[data-section="sub-total"]');
         let total = 0;
-        let descuento = parseFloat($('#poductos-ventas').find('tfoot').find('tr td[data-section="descuento-valor"]').text());
+        // let descuento = parseFloat($('#poductos-ventas').find('tfoot').find('tr td[data-section="descuento-valor"]').text());
         let pagar = 0;
         $.each(tabla, function (index, element) {
             let sub_total = parseFloat(element.children[0].innerText);
@@ -161,7 +200,8 @@ class VentaView {
         });
         $('#poductos-ventas').find('tfoot').find('tr td[data-section="total-valor"]').text(total.toFixed(2));
 
-        pagar = total - descuento;
+        // pagar = total - descuento;
+        pagar = total;
         $('#poductos-ventas').find('tfoot').find('tr td[data-section="pagar-valor"]').text(pagar.toFixed(2));
     }
 }

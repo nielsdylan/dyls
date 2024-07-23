@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('producto_id')->nullable();
             $table->integer('recepcion_id')->nullable();
             $table->integer('recepcion_detalle_id')->nullable();
+            $table->integer('tipo_venta_id')->nullable();
+            $table->integer('pagar_id')->nullable();
             $table->integer('estado_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

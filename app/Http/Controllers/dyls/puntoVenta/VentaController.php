@@ -40,6 +40,8 @@ class VentaController extends Controller
             $data->producto_id          = $producto->id;
             $data->recepcion_id         = $request->recepcion_id;
             $data->recepcion_detalle_id = $request->recepcion_detalle_id;
+            $data->tipo_venta_id        = 1; // ventas al cuarto
+            $data->pagar_id             = 2; // pagar despues
             $data->estado_id            = 1;
             $data->save();
             $data->producto;
@@ -65,7 +67,7 @@ class VentaController extends Controller
 
     public function guardar(Request $request) {
         try {
-            $venta = RecepcionProductoVenta::find('id',$request->id);
+            $venta = RecepcionProductoVenta::find($request->id);
             $venta->cantidad = $request->cantidad;
             $venta->save();
             return response()->json(["tipo"=>200],200);
@@ -77,6 +79,16 @@ class VentaController extends Controller
         try {
             $venta = RecepcionProductoVenta::find($id);
             $venta->estado_id = 2;
+            $venta->save();
+            return response()->json(["tipo"=>200],200);
+        } catch (Exception) {
+            return response()->json(["titulo"=>"Alerta","texto"=>"Comuniquese con su area de TI, ocurrio un erro al momento de guardar las cantidades.","icono"=>"warning" ,"tipo"=>401],200);
+        }
+    }
+    public function guardarPago(Request $request) {
+        try {
+            $venta = RecepcionProductoVenta::find($request->id);
+            $venta->pagar_id = $request->pagar_id;
             $venta->save();
             return response()->json(["tipo"=>200],200);
         } catch (Exception) {
