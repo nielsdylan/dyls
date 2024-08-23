@@ -16,6 +16,7 @@ class Producto extends Model
     protected $fillable = ['imagen', 'codigo','descripcion','stock','precio','jerarquia_id','estado_id'
         // ,'created_id', 'updated_id', 'deleted_id'
     ];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     public function estados(): BelongsTo
     {
         return $this->belongsTo(Estado::class,'estado_id');

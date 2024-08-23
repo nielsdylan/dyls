@@ -13,6 +13,7 @@ use App\Http\Controllers\dyls\puntoVenta\ProductoController;
 use App\Http\Controllers\dyls\puntoVenta\VentaController;
 use App\Http\Controllers\dyls\RecepcionController;
 use App\Http\Controllers\dyls\ReservasController;
+use App\Http\Controllers\dyls\VerificacionSalidaController;
 // use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Reservas\CalendarioController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('formulario/{id}', [RecepcionController::class, 'formulario'])->name('formulario');
             Route::post('guardar', [RecepcionController::class, 'guardar'])->name('guardar');
             Route::get('eliminar', [RecepcionController::class, 'eliminar'])->name('eliminar');
+        });
+        Route::name('verificacion-salida.')->prefix('verificacion-salida')->group(function () {
+            Route::get('lista', [VerificacionSalidaController::class, 'lista'])->name('lista');
+            // Route::get('listar', [VerificacionSalidaController::class, 'listar'])->name('listar');
+            Route::get('formulario/{id}', [VerificacionSalidaController::class, 'formulario'])->name('formulario');
+            // Route::post('guardar', [VerificacionSalidaController::class, 'guardar'])->name('guardar');
+            // Route::get('eliminar', [VerificacionSalidaController::class, 'eliminar'])->name('eliminar');
         });
 
         Route::name('configuraciones.')->prefix('configuraciones')->group(function () {

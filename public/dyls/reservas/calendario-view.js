@@ -22,6 +22,8 @@ class CalendarioView {
                 right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
             },
             dateClick: function (info) {
+
+                let fecha_salida = (moment(info.dateStr).add(1, 'day')).format('YYYY-MM-DD');
                 $("#guardar-modal")[0].reset();
                 $('#formulario-modal').modal('show');
                 $("#guardar-modal").find('[name="cliente_id"] option').removeAttr('selected');
@@ -30,10 +32,9 @@ class CalendarioView {
                 $("#guardar-modal").find('[name="saldo"]').val(0);
                 $("#guardar-modal").find('[name="total"]').val(0);
                 $("#guardar-modal").find('[name="id"]').val(0);
-
-
                 $('#formulario-modal').find('[name="fecha_entrada"]').val(info.dateStr);
-                $('#formulario-modal').find('[name="fecha_salida"]').val(info.dateStr);
+                $('#formulario-modal').find('[name="fecha_salida"]').val(fecha_salida);
+
                 $("#guardar-modal").find('[name="estado_id"] option[value="4"]').attr('selected','true');
                 $('[data-action="cancelar-reserva"]').addClass('d-none');
             },
@@ -62,6 +63,8 @@ class CalendarioView {
                     $("#guardar-modal").find('[name="id"]').val(respuesta.recepcion.id);
 
                     $('[data-action="cancelar-reserva"]').removeClass('d-none');
+
+
 
                     $('#formulario-modal').modal('show');
                 }).fail((respuesta) => {
