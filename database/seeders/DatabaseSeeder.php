@@ -15,6 +15,7 @@ use Database\Seeders\Job\ProductoSeeder;
 use Database\Seeders\Job\RecepcionSeeder;
 use Database\Seeders\Job\TarifaSeeder;
 use Database\Seeders\Job\TipoDocumentoSeeder;
+use Database\Seeders\Job\TipoPagoSeeder;
 use Database\Seeders\Job\UsuarioSeeder;
 use Illuminate\Database\Seeder;
 
@@ -43,7 +44,8 @@ class DatabaseSeeder extends Seeder
             TipoDocumentoSeeder::class,
             RecepcionSeeder::class,
             JerarquiaSeeder::class,
-            ProductoSeeder::class
+            ProductoSeeder::class,
+            TipoPagoSeeder::class
         ]);
     }
 }

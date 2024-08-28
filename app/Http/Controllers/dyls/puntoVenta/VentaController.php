@@ -17,7 +17,7 @@ class VentaController extends Controller
     //
     public function lista()
     {
-        $recepciones = Recepcion::where('estado_id',5)->get();
+        $recepciones = Recepcion::whereIn('estado_id',[5,6,7])->get();
         return view('dyls.punto-venta.venta.lista', get_defined_vars());
     }
 

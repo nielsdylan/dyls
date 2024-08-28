@@ -80,12 +80,13 @@
                 <form action="" id="guardar-modal">
                     @csrf
                     <input type="hidden" name="id" value="0">
+                    <input type="hidden" name="recepcion_detalle_id" value="0">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="cliente_id">Cliente</label>
                                 <div class="input-group mb-3">
-                                    
+
                                     <select class="form-select form-select-sm" id="cliente_id" name="cliente_id" >
                                         <option selected>Seleccione...</option>
                                         @foreach ($clientes as $value)
@@ -103,7 +104,7 @@
                                     <select id="recepcion_id" class="form-select form-select-sm mb-3 shadow-none" name="recepcion_id" required>
                                         <option value="">Seleccione...</option>
                                         @foreach ($recepciones as $value)
-                                        <option value="{{$value->id}}" data-habitacion="{{$value->habitaciones->id}}">{{$value->habitaciones->nombre}}</option>
+                                        <option value="{{$value->id}}" data-habitacion="{{$value->habitaciones->id}}">{{$value->habitaciones->nombre . ' (' . $value->estados->nombre . ')'}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -172,7 +173,7 @@
                         <button type="submit" class="btn btn-success btn-sm">Guardar</button>
                         <button type="button" data-action="cancelar-reserva" class="btn btn-danger btn-sm">Cancelar reserva</button>
                         <button type="button" class="btn btn-default btn-sm" data-bs-dismiss="modal">Cerrar</button>
-                        
+
 
                     </div>
                 </form>

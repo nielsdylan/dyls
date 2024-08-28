@@ -37,6 +37,8 @@ class CalendarioView {
 
                 $("#guardar-modal").find('[name="estado_id"] option[value="4"]').attr('selected','true');
                 $('[data-action="cancelar-reserva"]').addClass('d-none');
+
+
             },
             eventClick: function(info) {
                 $("#guardar-modal")[0].reset();
@@ -46,6 +48,7 @@ class CalendarioView {
                 $("#guardar-modal").find('[name="saldo"]').val(0);
                 $("#guardar-modal").find('[name="total"]').val(0);
                 $("#guardar-modal").find('[name="id"]').val(0);
+                // console.log(info.event.groupId);
                 model.editar(info.event.id).then((respuesta) => {
                     $("#guardar-modal").find('[name="cliente_id"] option[value="'+respuesta.recepcion_detalle.cliente_id+'"]').attr('selected','true');
                     $("#guardar-modal").find('[name="recepcion_id"] option[value="'+respuesta.recepcion_detalle.recepcion_id+'"]').attr('selected','true');
@@ -64,7 +67,7 @@ class CalendarioView {
 
                     $('[data-action="cancelar-reserva"]').removeClass('d-none');
 
-
+                    $('#guardar-modal [name="recepcion_detalle_id"]').val(info.event.groupId);
 
                     $('#formulario-modal').modal('show');
                 }).fail((respuesta) => {

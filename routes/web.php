@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('lista', [VerificacionSalidaController::class, 'lista'])->name('lista');
             // Route::get('listar', [VerificacionSalidaController::class, 'listar'])->name('listar');
             Route::get('formulario/{id}', [VerificacionSalidaController::class, 'formulario'])->name('formulario');
-            // Route::post('guardar', [VerificacionSalidaController::class, 'guardar'])->name('guardar');
+            Route::post('guardar', [VerificacionSalidaController::class, 'guardar'])->name('guardar');
             // Route::get('eliminar', [VerificacionSalidaController::class, 'eliminar'])->name('eliminar');
         });
 

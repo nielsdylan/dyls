@@ -22,8 +22,13 @@ class ReservasController extends Controller
         return view('dyls.reservas.calendario', get_defined_vars());
     }
     public function guardar(Request $request) {
-
         $verificacion = Recepcion::where('id',$request->recepcion_id)->first();
+
+        if($verificacion->estado_id !== 3 || $verificacion->estado_id !== 10){
+            return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
+        }
+        return $request;
+
 
         if($verificacion->estado_id !== 3 && ($request->id == 0)){
             return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
@@ -34,7 +39,7 @@ class ReservasController extends Controller
         $recepcion->save();
 
         // $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $recepcion->id]);
-        $data = RecepcionDetalle::where('recepcion_id',$request->recepcion_id)->whereNotIn('estado_id',[9,8,2])->first();
+        $data = RecepcionDetalle::where('id',$request->recepcion_detalle_id)->whereNotIn('estado_id',[9,8,2])->first();
         // return $request;exit;
         if(!$data){
             $data = new RecepcionDetalle();
@@ -71,14 +76,14 @@ class ReservasController extends Controller
         //     textColor: '#161D2B',
         //     borderColor: '#161D2B'
         // },
-        $recepciones = Recepcion::whereIn('estado_id',[4,5])->get();
-        
+        $recepciones = Recepcion::whereIn('estado_id',[4,5,6,7])->get();
+        // $recepcion_Detalle =RecepcionDetalle::whereIn('estado_id',[4,5,6,7])->get();
         $eventos = array();
         foreach ($recepciones as $key => $value) {
             // return $value->detalle;
             array_push($eventos,array(
                 "id"=> $value->id,
-                // "groupId"=> $value->id,
+                "groupId"=> $value->detalle->id,
                 "title"=> $value->habitaciones->nombre . ' ' . $value->habitaciones->categoria->nombre,
                 "start"=> $value->detalle->fecha_entrada.'T'.$value->detalle->hora_entrada ,
                 "end"=> $value->detalle->fecha_salida.'T'.$value->detalle->hora_salida,

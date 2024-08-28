@@ -57,6 +57,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <input type="hidden" name="habitacion_id" value="{{ $recepcion->habitaciones->id }}">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -82,20 +83,6 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="precio">Precio :</label> <strong>{{$recepcion->habitaciones->precio}}</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="estado">Estados :</label> <strong>{{$recepcion->estados->nombre}}</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="detalle">Detalle :</label> <p>{{$recepcion->habitaciones->descripcion}}</p>
                             </div>
                         </div>
                     </div>
@@ -110,34 +97,35 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nombre">Nombre :</label><strong> {{$recepcion->habitaciones->nombre}}</strong>
+                                <label for="nombre">Nombre :</label><strong> {{$cliente->persona->apellido_paterno. ' ' .$cliente->persona->apellido_materno. ' ' .$cliente->persona->nombres}}</strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="tarifa">Documento :</label> <strong>{{$recepcion->habitaciones->tarifa->nombre}}</strong>
+                                <label for="tarifa">Documento :</label> <strong>{{$cliente->persona->nro_documento}}</strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="categoria">Telefono :</label> <strong>{{$recepcion->habitaciones->categoria->nombre}}</strong>
+                                <label for="categoria">Telefono :</label> <strong>{{$cliente->persona->telefono}}</strong>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="precio">Correo :</label> <strong>{{$recepcion->habitaciones->precio}}</strong>
+                                <label for="precio">Correo :</label> <strong>{{$cliente->persona->telefono}}</strong>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -145,49 +133,139 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h6 class="card-title">Datos de la habitación</h6>
+                        <h6 class="card-title">Datos del hospedaje</h6>
                     </div>
                 </div>
                 <div class="card-body">
+                    <input type="hidden" name="recepcion_detalle_id" value="{{ $recepcion_detalle->id }}">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nombre">Nombre :</label><strong> {{$recepcion->habitaciones->nombre}}</strong>
+                                <label for="nombre">Fecha y hora de entrada :</label><strong> {{$recepcion_detalle->fecha_entrada. ' ' . $recepcion_detalle->hora_entrada}}</strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="tarifa">Tarifa :</label> <strong>{{$recepcion->habitaciones->tarifa->nombre}}</strong>
+                                <label for="tarifa">Fecha y hora de salida :</label> <strong>{{$recepcion_detalle->fecha_salida. ' ' . $recepcion_detalle->hora_salida}}</strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="categoria">Categoría :</label> <strong>{{$recepcion->habitaciones->categoria->nombre}}</strong>
+                                <label for="categoria">Tiempo estimado :</label> <strong> </strong>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="precio">Precio :</label> <strong>{{$recepcion->habitaciones->precio}}</strong>
+                                <label for="precio">Tiempo rebasado :</label> <strong> </strong>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="estado">Estados :</label> <strong>{{$recepcion->estados->nombre}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        {{-- <div class="card-header d-flex justify-content-between">
+                            <div class="header-title">
+
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="detalle">Detalle :</label> <p>{{$recepcion->habitaciones->descripcion}}</p>
+                        </div> --}}
+                        <div class="card-body">
+                            <h6 class="card-title">Costo de alojamiento</h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-sm" id="table-costo-alojamiento">
+                                        <thead>
+                                            <tr>
+                                                <th>Costo de Habitación</th>
+                                                <th>Dias</th>
+                                                <th>Dinero adelantado</th>
+                                                <th>Mora/Penalidad</th>
+                                                <th>Por pagar</th>
+                                                {{-- <th>Responsable</th> --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody data-table="costo-alojamiento-detalle">
+                                            <tr>
+                                                <th data-section="costo-habitacion">
+                                                    <span></span><label for="">{{ number_format($recepcion_detalle->total, 2, '.', ',')  }}</label>
+                                                </th>
+                                                <td data-section="total-dias"><span></span><label for="">{{ $total_dias }}</label></td>
+                                                <td data-section="adelanto"><span></span> <label for="">{{ number_format($recepcion_detalle->adelanto, 2, '.', ',')  }}</label></td>
+                                                <td data-section="mora-penalidad"><input type="text" name="mora-penalidad" class="form-control form-control-sm" data-action="penalidad"></td>
+                                                <td data-section="por-pagar"><span></span><label for="">{{ number_format((($recepcion_detalle->total*$total_dias) - $recepcion_detalle->adelanto), 2, '.', ',')  }}</label></td>
+                                                {{-- <td></td> --}}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <h6 class="card-title">Servicio de alojamiento</h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-sm table-responsive-sm billing" id="data-servicios">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio Unitario</th>
+                                                <th>Estado</th>
+                                                <th>Sub Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-table="body-servicios">
+                                            @foreach ($ventas as $key=>$value)
+                                                <tr>
+                                                    <th data-section="descripcion">
+                                                        <h6 class="mb-0">{{ $value->producto->codigo }}</h6>
+                                                        <p class="mb-0">{{ $value->producto->descripcion }}</p>
+                                                    </td>
+                                                    <td data-section="cantidad">{{ $value->cantidad }}</td>
+                                                    <td data-section="precio">{{ number_format($value->precio, 2, '.', ',') }}</td>
+                                                    <td data-section="estado">{{ ($value->pagar_id==1?'PAGADO':'FALTA PAGAR') }}</td>
+                                                    <td data-section="sub-total"><span></span> <label for="">{{ number_format(($value->precio * $value->cantidad), 2, '.', ',') }}</label></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot data-table="">
+                                            <tr>
+                                                <td data-section="total-text" colspan="4" class="text-end">Total:</td>
+                                                <td data-section="total-valor"><span data-section="total-valor">0.00</span></td>
+                                            </tr>
+                                            <tr>
+
+                                                <td data-section="total-text" colspan="4" class="text-end">Total a Pagar:</td>
+                                                <td data-section="total-pagar"><span data-section="total-valor">0.00</span></td>
+                                            </tr>
+                                            <tr class="text-end">
+                                                <td data-section="text-tipo-pago" colspan="4" class="text-end"></td>
+                                                <td data-section="select-tipo-pago" class="pe-0 text-end">
+                                                    <select name="tipo_pago_id" id="" class="form-select shadow-none form-select-sm w-auto">
+                                                        <option value="" hidden>Tipo de pago</option>
+                                                        @foreach($tipo_pago as $key_pago => $value_pago)
+                                                        <option value="{{ $value_pago->id }}">{{ $value_pago->nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-end">
+                                    <button type="button" class="btn btn-success btn-sm" data-action="culminar-limpiar" >Culminar/Limpiar habitación</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -196,14 +274,13 @@
         </div>
     </div>
 
-
 @endsection
 @section('script')
-    {{-- <script src="{{ asset('dyls/recepciones/recepciones-model.js') }}"></script>
-    <script src="{{ asset('dyls/recepciones/recepciones-view.js') }}"></script>
+    <script src="{{ asset('dyls/verificacion-salida/verificacion-salida-model.js') }}"></script>
+    <script src="{{ asset('dyls/verificacion-salida/verificacion-salida-view.js') }}"></script>
     <script>
-        const view = new RecepcionesView(new RecepcionesModel(token));
-        // view.listar();
+        const view = new VerificacionSalidaView(new VerificacionSalidaModel(token));
+        view.sumarCostos();
         view.eventos();
-    </script> --}}
+    </script>
 @endsection

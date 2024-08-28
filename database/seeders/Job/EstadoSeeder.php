@@ -77,7 +77,7 @@ class EstadoSeeder extends Seeder
         ]);
         //6
         DB::table('estados')->insert([
-            'nombre'        => 'LIMPIEZA',
+            'nombre'        => 'LIMPIEZA/OCUPADO',
             'descripcion'   => 'ES CUANDO LA HABITACIÓN SE RELIZA UNA LIMPIEZA .',
             'color'         => 'info',
             'color_exadecimal'  => '#C03221',
@@ -117,6 +117,18 @@ class EstadoSeeder extends Seeder
             'descripcion'   => 'ES CUANDO EL CLIENTE CANCELA SU RESERVA O NO SE PRESENTO.',
             'color'         => 'danger',
 
+            'color_exadecimal'  => '#C03221',
+            'background_color'  => '#F2D6D3',
+            'text_color'        => '#C03221',
+            'border_color'      => '#C03221',
+            'created_at'        => date('Y-m-d H:i:s'),
+            'updated_at'        => date('Y-m-d H:i:s'),
+        ]);
+        //10
+        DB::table('estados')->insert([
+            'nombre'        => 'LIMPIEZA',
+            'descripcion'   => 'ES CUANDO LA HABITACIÓN SE FINALIZA Y SE REALIZA UNA LIMPIESA.',
+            'color'         => 'info',
             'color_exadecimal'  => '#C03221',
             'background_color'  => '#F2D6D3',
             'text_color'        => '#C03221',
