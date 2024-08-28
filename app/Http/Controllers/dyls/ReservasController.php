@@ -24,15 +24,12 @@ class ReservasController extends Controller
     public function guardar(Request $request) {
         $verificacion = Recepcion::where('id',$request->recepcion_id)->first();
 
-        if($verificacion->estado_id !== 3 || $verificacion->estado_id !== 10){
+        if($verificacion->estado_id !== 3 && $verificacion->estado_id !== 10){
             return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
         }
-        return $request;
-
-
-        if($verificacion->estado_id !== 3 && ($request->id == 0)){
-            return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
-        }
+        // if($verificacion->estado_id !== 3 && ($request->id == 0)){
+        //     return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
+        // }
 
         $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
         $recepcion->estado_id = $request->estado_id;
