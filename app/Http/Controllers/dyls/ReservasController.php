@@ -22,27 +22,33 @@ class ReservasController extends Controller
         return view('dyls.reservas.calendario', get_defined_vars());
     }
     public function guardar(Request $request) {
-        $verificacion = Recepcion::where('id',$request->recepcion_id)->first();
 
-        if($verificacion->estado_id !== 3 && $verificacion->estado_id !== 10){
-            return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
+        $verificacion = Recepcion::where('habitacion_id',$request->habitacion_id)->first();
+        $total_recepciones = Recepcion::where('habitacion_id',$request->habitacion_id)->count();
+
+        if($total_recepciones>0){// validar este if de comparaciones de estado
+            if($verificacion->estado_id !== 3 && $verificacion->estado_id !== 10){
+                return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
+            }
         }
-        // if($verificacion->estado_id !== 3 && ($request->id == 0)){
-        //     return response()->json(["titulo" => "Alerta", "mensaje" => "Habitación no disponible (".$verificacion->estados->nombre .")", "tipo" => "warning"],200);
-        // }
-
-        $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
+        return $total_recepciones;
+        $recepcion = Recepcion::where('habitacion_id', $request->habitacion_id)->first();
         $recepcion->estado_id = $request->estado_id;
         $recepcion->save();
 
-        // $data = RecepcionDetalle::firstOrNew(['recepcion_id' => $recepcion->id]);
+        if($request->recepcion_id !== 0 && $recepcion->id !== $request->recepcion_id){
+            $recepcion_estado = Recepcion::find($request->recepcion_id);
+            $recepcion_estado->estado_id = 3;
+            $recepcion_estado->save();
+        }
+
         $data = RecepcionDetalle::where('id',$request->recepcion_detalle_id)->whereNotIn('estado_id',[9,8,2])->first();
-        // return $request;exit;
+        // return [$recepcion, $request->all()];
         if(!$data){
             $data = new RecepcionDetalle();
         }
 
-        $data->recepcion_id     = $request->recepcion_id;
+        $data->recepcion_id     = $recepcion->id;
         $data->cliente_id       = $request->cliente_id;
         $data->fecha_entrada    = $request->fecha_entrada;
         $data->fecha_salida     = $request->fecha_salida;
@@ -56,11 +62,11 @@ class ReservasController extends Controller
         $data->save();
 
         if(in_array($request->estado_id, [9,8,2])){
-            $recepcion = Recepcion::firstOrNew(['id' => $request->recepcion_id]);
+            $recepcion = Recepcion::where('habitacion_id', $request->habitacion_id)->first();
             $recepcion->estado_id = 3;
             $recepcion->save();
         }
-
+        // return $request->all();
         return response()->json(["titulo" => "Éxito", "mensaje" => "Se guardo con éxito", "tipo" => "success"],200);
     }
     public function eventos() {

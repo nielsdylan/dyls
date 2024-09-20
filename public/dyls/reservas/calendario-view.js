@@ -27,11 +27,11 @@ class CalendarioView {
                 $("#guardar-modal")[0].reset();
                 $('#formulario-modal').modal('show');
                 $("#guardar-modal").find('[name="cliente_id"] option').removeAttr('selected');
-                $("#guardar-modal").find('[name="recepcion_id"] option').removeAttr('selected');
+                $("#guardar-modal").find('[name="habitacion_id"] option').removeAttr('selected');
                 $("#guardar-modal").find('[name="estado_id"] option').removeAttr('selected');
                 $("#guardar-modal").find('[name="saldo"]').val(0);
                 $("#guardar-modal").find('[name="total"]').val(0);
-                $("#guardar-modal").find('[name="id"]').val(0);
+                $("#guardar-modal").find('[name="recepcion_id"]').val(0);
                 $('#formulario-modal').find('[name="fecha_entrada"]').val(info.dateStr);
                 $('#formulario-modal').find('[name="fecha_salida"]').val(fecha_salida);
 
@@ -43,15 +43,15 @@ class CalendarioView {
             eventClick: function(info) {
                 $("#guardar-modal")[0].reset();
                 $("#guardar-modal").find('[name="cliente_id"] option').removeAttr('selected');
-                $("#guardar-modal").find('[name="recepcion_id"] option').removeAttr('selected');
+                $("#guardar-modal").find('[name="habitacion_id"] option').removeAttr('selected');
                 $("#guardar-modal").find('[name="estado_id"] option').removeAttr('selected');
                 $("#guardar-modal").find('[name="saldo"]').val(0);
                 $("#guardar-modal").find('[name="total"]').val(0);
-                $("#guardar-modal").find('[name="id"]').val(0);
+                $("#guardar-modal").find('[name="recepcion_id"]').val(0);
                 // console.log(info.event.groupId);
                 model.editar(info.event.id).then((respuesta) => {
                     $("#guardar-modal").find('[name="cliente_id"] option[value="'+respuesta.recepcion_detalle.cliente_id+'"]').attr('selected','true');
-                    $("#guardar-modal").find('[name="recepcion_id"] option[value="'+respuesta.recepcion_detalle.recepcion_id+'"]').attr('selected','true');
+                    $("#guardar-modal").find('[name="habitacion_id"] option[value="'+respuesta.recepcion.habitacion_id+'"]').attr('selected','true');
                     $("#guardar-modal").find('[name="estado_id"] option[value="'+respuesta.recepcion_detalle.estado_id+'"]').attr('selected','true');
 
                     $("#guardar-modal").find('[name="fecha_entrada"]').val(respuesta.recepcion_detalle.fecha_entrada);
@@ -63,7 +63,7 @@ class CalendarioView {
                     $("#guardar-modal").find('[name="saldo"]').val(respuesta.recepcion_detalle.saldo);
                     $("#guardar-modal").find('[name="total"]').val(respuesta.recepcion_detalle.total);
                     $("#guardar-modal").find('#saldo').val(respuesta.recepcion_detalle.saldo);
-                    $("#guardar-modal").find('[name="id"]').val(respuesta.recepcion.id);
+                    $("#guardar-modal").find('[name="recepcion_id"]').val(respuesta.recepcion.id);
 
                     $('[data-action="cancelar-reserva"]').removeClass('d-none');
 

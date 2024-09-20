@@ -79,7 +79,7 @@
                 </div>
                 <form action="" id="guardar-modal">
                     @csrf
-                    <input type="hidden" name="id" value="0">
+                    <input type="hidden" name="recepcion_id" value="0">
                     <input type="hidden" name="recepcion_detalle_id" value="0">
                     <div class="modal-body">
                         <div class="row">
@@ -100,8 +100,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="recepcion_id">Habitaciones</label>
-                                    <select id="recepcion_id" class="form-select form-select-sm mb-3 shadow-none" name="recepcion_id" required>
+                                    <label for="habitacion_id">Habitaciones</label>
+                                    <select id="habitacion_id" class="form-select form-select-sm mb-3 shadow-none" name="habitacion_id" required>
                                         <option value="">Seleccione...</option>
                                         @foreach ($recepciones as $value)
                                         <option value="{{$value->id}}" data-habitacion="{{$value->habitaciones->id}}">{{$value->habitaciones->nombre . ' (' . $value->estados->nombre . ')'}}</option>
